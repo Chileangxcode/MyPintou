@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="110" fill="url(#bg-gradient)"/>
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181B2B" />
+      <stop offset="100%" stop-color="#0A0B10" />
+    </linearGradient>
+    <linearGradient id="p-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8338EC" />
+      <stop offset="50%" stop-color="#FF006E" />
+      <stop offset="100%" stop-color="#FFBE0B" />
+    </linearGradient>
+  </defs>
+  <!-- Stylized 'P' -->
+  <path d="M170,380 L170,160 L280,160 C340,160 370,190 370,240 C370,290 340,320 280,320 L230,320 L230,380 Z" fill="none" stroke="url(#p-gradient)" stroke-width="45" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Growth Arrow -->
+  <path d="M260,270 L400,130 M340,130 L400,130 L400,190" fill="none" stroke="#00F5D4" stroke-width="35" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

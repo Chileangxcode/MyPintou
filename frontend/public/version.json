@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "buildTimestamp": "2026-11-01T09:22:16.384Z",
+  "releaseChannel": "production",
+  "releaseNotes": [
+    "Full Responsive Redesign (Small Mobile 320px to Desktop 1920px+)",
+    "Installable Progressive Web App (PWA) with Standalone Mode",
+    "Zero-Reinstall Background Automatic Update System",
+    "Mobile Quick Attendance Taker & Touch-Optimized Scoring",
+    "Offline Application Shell & Network-First Caching",
+    "Enhanced Google Apps Script & Google Sheets Synchronization"
+  ]
+}

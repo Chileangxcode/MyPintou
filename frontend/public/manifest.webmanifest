@@ -1,0 +1,70 @@
+{
+  "id": "mypintou-sms-pwa-v1",
+  "name": "MyPintou (Myពិន្ទុ) • Student Management System",
+  "short_name": "MyPintou",
+  "description": "ប្រព័ន្ធតាមដានលទ្ធផលសិក្សា ពិន្ទុ និងការគ្រប់គ្រងនិស្សិតឆ្លាតវៃ",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0a0b10",
+  "theme_color": "#0a0b10",
+  "lang": "km",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/images/app_icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ផ្ទាំងគ្រប់គ្រងពិន្ទុ",
+      "short_name": "Dashboard",
+      "description": "បើកផ្ទាំងគ្រប់គ្រងពិន្ទុនិស្សិត",
+      "url": "/student/dashboard",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ស្វែងរកនិស្សិត",
+      "short_name": "Lookup",
+      "description": "ស្វែងរកព័ត៌មាន និងពិន្ទុតាមអត្តលេខ",
+      "url": "/student-lookup",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "គ្រប់គ្រងពិន្ទុគ្រូ",
+      "short_name": "Admin",
+      "description": "ច្រកចូលសម្រាប់គ្រូ និងអ្នកគ្រប់គ្រង",
+      "url": "/admin/dashboard",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
