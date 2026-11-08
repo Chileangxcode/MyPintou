@@ -1516,14 +1516,20 @@ function apiUpdateConfig(params) {
     }
   }
 
-  // Purge cache so every client sees new school info & logo immediately
+  // Purge cache so every client sees new school info, library & logo immediately
   var cache = CacheService.getScriptCache();
   try {
-    cache.removeAll([
-      "NORM_STUDENT_DATA_" + config.spreadsheetId,
+    var cacheKey = "NORM_STUDENT_DATA_" + config.spreadsheetId;
+    var keysToRemove = [
+      cacheKey,
+      cacheKey + "_META",
       "ADMIN_STATS_" + config.spreadsheetId,
       "CONFIG_" + config.spreadsheetId
-    ]);
+    ];
+    for (var c = 0; c < 20; c++) {
+      keysToRemove.push(cacheKey + "_CHUNK_" + c);
+    }
+    cache.removeAll(keysToRemove);
   } catch (e) {}
 
   var newConfig = readDynamicConfig(ss);

@@ -78,7 +78,8 @@ export default function AdminLibraryPage() {
 
   // Real-Time auto-sync across all open tabs/windows and devices
   React.useEffect(() => {
-    const unsub = dataSyncService.subscribeToEntity("elibrary", () => {
+    const unsub = dataSyncService.subscribeToEntity("elibrary", (event) => {
+      if (event?.senderId === "local_admin_sync") return;
       refreshLibraryResources(true);
     });
     return () => unsub();
@@ -200,12 +201,21 @@ export default function AdminLibraryPage() {
 
     if (editingItem) {
       updateResource(editingItem.id, formData);
+      setSyncToast({
+        type: "success",
+        message: `បានកែសម្រួលឯកសារ "${formData.title}" និងកំពុង Sync ទៅ Cloud!`
+      });
     } else {
       addResource({
         ...formData,
         fileUrl: formData.fileUrl || "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
       });
+      setSyncToast({
+        type: "success",
+        message: `បាន Upload ឯកសារ "${formData.title}" និងកំពុង Sync ទៅ Cloud!`
+      });
     }
+    setTimeout(() => setSyncToast(null), 4000);
     setShowUploadModal(false);
   };
 

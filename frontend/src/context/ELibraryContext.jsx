@@ -304,6 +304,17 @@ const DEFAULT_RESOURCES = [
   }
 ];
 
+function resolveAdminToken() {
+  try {
+    const adminStr = sessionStorage.getItem("uni_admin_session") || localStorage.getItem("uni_admin_session");
+    if (adminStr) {
+      const parsed = JSON.parse(adminStr);
+      if (parsed?.token) return parsed.token;
+    }
+  } catch (_) {}
+  return localStorage.getItem("mypintou_admin_token") || "MyPintou#Sec2026$X9z";
+}
+
 export function ELibraryProvider({ children }) {
   const [resources, setResources] = useState(() => {
     try {
@@ -329,18 +340,22 @@ export function ELibraryProvider({ children }) {
   });
 
   const [isSyncing, setIsSyncing] = useState(false);
+  const isSyncingRef = React.useRef(false);
+  const lastLocalSaveTimeRef = React.useRef(0);
   const [isGoogleSheetConnected, setIsGoogleSheetConnected] = useState(false);
   const [lastSyncTime, setLastSyncTime] = useState(null);
   const [syncError, setSyncError] = useState(null);
 
   // Sync resources list to Google Sheets (persists to ⚙️_Config sheet)
   const syncToGoogleSheet = async (list) => {
+    isSyncingRef.current = true;
     setIsSyncing(true);
     setSyncError(null);
+    lastLocalSaveTimeRef.current = Date.now();
     try {
-      const token = localStorage.getItem("mypintou_admin_token") || "MyPintou#Sec2026$X9z";
+      const token = resolveAdminToken();
       const jsonPayload = JSON.stringify(list);
-      await apiRequest(
+      const res = await apiRequest(
         "admin_update_config",
         {
           token,
@@ -351,25 +366,43 @@ export function ELibraryProvider({ children }) {
         },
         { method: "POST" }
       );
-      setLastSyncTime(new Date());
-      setIsGoogleSheetConnected(true);
 
-      // Auto Real-Time sync broadcast across all connected clients & devices
-      dataSyncService.publishEvent({
-        entityType: "elibrary",
-        action: "elibrary.updated",
-        recordId: "resources"
-      });
+      if (res && res.success) {
+        setLastSyncTime(new Date());
+        setIsGoogleSheetConnected(true);
+        setResources(list);
+        localStorage.setItem("mypintou_elibrary_resources", jsonPayload);
+
+        // Auto Real-Time sync broadcast across all connected clients & devices
+        dataSyncService.publishEvent({
+          entityType: "elibrary",
+          action: "elibrary.updated",
+          recordId: "resources",
+          senderId: "local_admin_sync"
+        });
+      } else {
+        console.warn("Server returned unsuccessful update:", res);
+        setSyncError(res?.message || "បរាជ័យក្នុងការ Sync ជាមួយ Cloud Server");
+      }
     } catch (e) {
       console.warn("E-Library sync to Google Sheet notice:", e);
       setSyncError(e?.message || "បរាជ័យក្នុងការ Sync ជាមួយ Cloud Server");
     } finally {
       setIsSyncing(false);
+      // Keep guard active for 1.5s after finishing to let any delayed server events pass
+      setTimeout(() => {
+        isSyncingRef.current = false;
+      }, 1500);
     }
   };
 
   // Fetch latest resources from live Google Sheet
   const refreshLibraryResources = async (force = true) => {
+    // If a save operation is in-flight or completed just now, protect the newly saved items from stale reads
+    if (isSyncingRef.current || (Date.now() - lastLocalSaveTimeRef.current < 2500 && !force)) {
+      return;
+    }
+
     setIsSyncing(true);
     try {
       if (force) {
@@ -385,6 +418,10 @@ export function ELibraryProvider({ children }) {
         try {
           const parsed = JSON.parse(candidateStr);
           if (Array.isArray(parsed) && parsed.length > 0) {
+            // Guard: don't overwrite if local state has newer/more items and was saved recently
+            if (resources.length > parsed.length && (Date.now() - lastLocalSaveTimeRef.current < 5000)) {
+              return;
+            }
             setResources(parsed);
             localStorage.setItem("mypintou_elibrary_resources", JSON.stringify(parsed));
             setLastSyncTime(new Date());
@@ -408,10 +445,12 @@ export function ELibraryProvider({ children }) {
 
     // Subscribe to real-time sync events for instant updates across Admin, Teacher, and Student
     const unsubElib = dataSyncService.subscribeToEntity("elibrary", (event) => {
+      if (event?.senderId === "local_admin_sync") return;
       console.log("[ELibraryContext] Real-time event received:", event);
       refreshLibraryResources(true);
     });
-    const unsubConfig = dataSyncService.subscribeToEntity("config", () => {
+    const unsubConfig = dataSyncService.subscribeToEntity("config", (event) => {
+      if (event?.senderId === "local_admin_sync") return;
       refreshLibraryResources(true);
     });
 

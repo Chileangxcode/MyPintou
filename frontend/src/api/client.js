@@ -303,12 +303,29 @@ async function fetchNetworkData(action, params = {}, options = {}, cacheKey, pol
   activeSyncCount++;
   notifySyncListeners();
 
-  const query = new URLSearchParams({
+  const isPost = options.method === "POST" || isMutation;
+  const queryObj = {
     action,
-    ...params,
     _t: Date.now().toString()
-  });
+  };
 
+  if (isPost) {
+    // CRITICAL FIX: For POST/mutations, never serialize massive payloads (e.g. updates, records, JSON strings)
+    // into the URL query string. Google Apps Script / HTTP proxies reject long URLs with 411/414 errors.
+    // Keep only essential lightweight routing parameters in the URL query string:
+    if (params.token) queryObj.token = String(params.token);
+    if (params.id && typeof params.id === "string" && params.id.length < 100) queryObj.id = params.id;
+    if (params.studentId && typeof params.studentId === "string" && params.studentId.length < 100) queryObj.studentId = params.studentId;
+  } else {
+    // For GET queries: serialize non-null primitive params
+    for (const [k, v] of Object.entries(params)) {
+      if (v !== undefined && v !== null && typeof v !== "object") {
+        queryObj[k] = String(v);
+      }
+    }
+  }
+
+  const query = new URLSearchParams(queryObj);
   const url = `${APPS_SCRIPT_URL}?${query.toString()}`;
   const controller = options.signal ? null : new AbortController();
   const signal = options.signal || controller.signal;
@@ -322,14 +339,14 @@ async function fetchNetworkData(action, params = {}, options = {}, cacheKey, pol
 
   try {
     const fetchOptions = {
-      method: options.method || (isMutation ? "POST" : "GET"),
+      method: isPost ? "POST" : "GET",
       headers: {
         Accept: "application/json"
       },
       signal
     };
 
-    if (fetchOptions.method === "POST") {
+    if (isPost) {
       fetchOptions.headers["Content-Type"] = "text/plain;charset=utf-8";
       fetchOptions.body = JSON.stringify(options.body || params);
     }
