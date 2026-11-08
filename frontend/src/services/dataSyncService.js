@@ -52,8 +52,8 @@ class DataSyncService {
 
     // Polling fallback state
     this.pollTimer = null;
-    this.baseIntervalMs = 8000; // 8s active
-    this.backgroundIntervalMs = 30000; // 30s background
+    this.baseIntervalMs = 3500; // 3.5s active for near-instant multi-device sync
+    this.backgroundIntervalMs = 25000; // 25s background
     this.currentBackoffMs = this.baseIntervalMs;
     this.isPollingInFlight = false;
 
@@ -242,8 +242,10 @@ class DataSyncService {
     const candidateTypes = new Set([event.entityType]);
     const et = String(event.entityType || "").toLowerCase();
     if (et.includes("score")) { candidateTypes.add("score"); candidateTypes.add("scores"); }
+    if (et.includes("attendance")) { candidateTypes.add("attendance"); candidateTypes.add("score"); candidateTypes.add("scores"); }
     if (et.includes("student")) { candidateTypes.add("student"); candidateTypes.add("students"); }
     if (et.includes("quiz")) { candidateTypes.add("quiz"); candidateTypes.add("quizzes"); }
+    if (et.includes("user")) { candidateTypes.add("user"); candidateTypes.add("users"); }
     if (et.includes("lib")) { candidateTypes.add("library"); candidateTypes.add("elibrary"); }
     if (et.includes("announce")) { candidateTypes.add("announcement"); candidateTypes.add("announcements"); }
     if (et.includes("config") || et.includes("setting")) { candidateTypes.add("config"); candidateTypes.add("settings"); }

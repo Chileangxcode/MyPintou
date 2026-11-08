@@ -287,21 +287,45 @@ export default function AdminQuizzesPage() {
     if (dirtyCount === 0) return;
     setIsSavingInline(true);
 
-    try {
-      const updates = Object.entries(inlineDirtyScores).map(([sid, scores]) => ({
-        studentId: sid,
-        scores
-      }));
+    const backupData = quizzesData ? JSON.parse(JSON.stringify(quizzesData)) : null;
+    const updates = Object.entries(inlineDirtyScores).map(([sid, scores]) => ({
+      studentId: sid,
+      scores
+    }));
 
+    // 1. Instant local optimistic update (0ms UI feedback!)
+    setQuizzesData((prev) => {
+      if (!prev || !prev.students) return prev;
+      return {
+        ...prev,
+        students: prev.students.map((s) => {
+          if (!inlineDirtyScores[s.studentId]) return s;
+          const mergedScores = { ...(s.scores || {}), ...inlineDirtyScores[s.studentId] };
+          const scoreValues = Object.values(mergedScores).filter((v) => v !== null && v !== "" && !isNaN(v));
+          const totalPoints = scoreValues.reduce((a, b) => a + Number(b), 0);
+          const scaled15 = Math.round((totalPoints / 255) * 15 * 10) / 10;
+          return {
+            ...s,
+            scores: mergedScores,
+            totalPoints,
+            scaled15
+          };
+        })
+      };
+    });
+
+    setInlineDirtyScores({});
+    showToast("បានរក្សាទុកពិន្ទុកែសម្រួលរហ័សដោយជោគជ័យ!", "success");
+
+    // 2. Single Batch Write to Google Sheets
+    try {
       const res = await updateStudentQuizzes(token, "", updates, true);
-      if (res && res.success) {
-        showToast(res.message || "បានរក្សាទុកពិន្ទុកែសម្រួលរហ័សដោយជោគជ័យ!", "success");
-        setInlineDirtyScores({});
-        await fetchData(true);
-      } else {
+      if (!res || !res.success) {
+        if (backupData) setQuizzesData(backupData);
         showToast(res?.message || "មិនអាចរក្សាទុកពិន្ទុបានឡើយ។", "error");
       }
     } catch (err) {
+      if (backupData) setQuizzesData(backupData);
       showToast(err.message || "កំហុសបណ្តាញ", "error");
     } finally {
       setIsSavingInline(false);
@@ -322,24 +346,51 @@ export default function AdminQuizzesPage() {
 
   const handleSaveStudentModal = async () => {
     if (!selectedStudent) return;
+    const targetSid = selectedStudent.studentId;
+    const targetName = selectedStudent.fullNameKh || selectedStudent.studentId;
     setIsSavingStudent(true);
 
-    try {
-      const formattedScores = {};
-      quizzesList.forEach((q) => {
-        const raw = studentModalScores[q.name];
-        formattedScores[q.name] = raw !== "" && raw !== null && raw !== undefined ? Number(raw) : null;
-      });
+    const formattedScores = {};
+    quizzesList.forEach((q) => {
+      const raw = studentModalScores[q.name];
+      formattedScores[q.name] = raw !== "" && raw !== null && raw !== undefined ? Number(raw) : null;
+    });
 
-      const res = await updateStudentQuizzes(token, selectedStudent.studentId, formattedScores);
-      if (res && res.success) {
-        showToast(`បានកែប្រែពិន្ទុនិស្សិត ${selectedStudent.fullNameKh || selectedStudent.studentId} ជោគជ័យ!`);
-        setSelectedStudent(null);
-        await fetchData(true);
-      } else {
+    const scoreValues = Object.values(formattedScores).filter((v) => v !== null && v !== "" && !isNaN(v));
+    const totalPoints = scoreValues.reduce((a, b) => a + Number(b), 0);
+    const scaled15 = Math.round((totalPoints / 255) * 15 * 10) / 10;
+
+    const backupData = quizzesData ? JSON.parse(JSON.stringify(quizzesData)) : null;
+
+    // 1. Instant local optimistic update (0ms!)
+    setQuizzesData((prev) => {
+      if (!prev || !prev.students) return prev;
+      return {
+        ...prev,
+        students: prev.students.map((s) => {
+          if (s.studentId !== targetSid) return s;
+          return {
+            ...s,
+            scores: formattedScores,
+            totalPoints,
+            scaled15
+          };
+        })
+      };
+    });
+
+    setSelectedStudent(null);
+    showToast(`បានកែប្រែពិន្ទុនិស្សិត ${targetName} ជោគជ័យ!`);
+
+    // 2. Background sync
+    try {
+      const res = await updateStudentQuizzes(token, targetSid, formattedScores);
+      if (!res || !res.success) {
+        if (backupData) setQuizzesData(backupData);
         showToast(res?.message || "មិនអាចរក្សាទុកបានឡើយ", "error");
       }
     } catch (err) {
+      if (backupData) setQuizzesData(backupData);
       showToast(err.message || "កំហុសបណ្តាញ", "error");
     } finally {
       setIsSavingStudent(false);

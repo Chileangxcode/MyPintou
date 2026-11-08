@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, Navigate, NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { prefetchApiData } from "../api/client.js";
 import MockBanner from "../components/MockBanner.jsx";
 import Footer from "../components/Footer.jsx";
 import RealtimeIndicator from "../components/RealtimeIndicator.jsx";
@@ -34,6 +35,24 @@ export default function StudentLayout() {
       setTimeout(() => setUpdateStatus(""), 4000);
     }
   };
+
+  // Background non-blocking prefetch of student library, scores, and profile for instant navigation
+  useEffect(() => {
+    if (isStudentAuthenticated && studentSession?.studentId) {
+      const timer = setTimeout(() => {
+        prefetchApiData("student_scores", {
+          studentId: studentSession.studentId,
+          studentName: studentSession.fullName || ""
+        });
+        prefetchApiData("student_profile", {
+          studentId: studentSession.studentId,
+          studentName: studentSession.fullName || ""
+        });
+        prefetchApiData("health", { refresh: "false" });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isStudentAuthenticated, studentSession?.studentId, studentSession?.fullName]);
 
   if (!isStudentAuthenticated || !studentSession) {
     return <Navigate to="/student-lookup" replace />;

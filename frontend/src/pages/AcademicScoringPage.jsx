@@ -31,6 +31,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import {
   getAdminScoringOverview,
   updateStudentScores,
+  bulkUpdateStudentScores,
   resetStudentScores,
   createStudentScore,
   deleteStudentScore,
@@ -695,11 +696,13 @@ export default function AcademicScoringPage() {
     showToast("success", `បានកត់ត្រាវត្តមានសម្រាប់ ${roomStudents.length} នាក់ជោគជ័យ!`);
 
     try {
+      const updates = [];
       for (const s of roomStudents) {
         const mark = attendanceMarks[s.studentId];
         if (mark !== undefined) {
           const sum = s.academicSummary || {};
-          await updateStudentScores(adminSession.token, s.studentId, {
+          updates.push({
+            studentId: s.studentId,
             attendance: Number(mark),
             qha: sum.totalQHA || 0,
             midterm: sum.midterm || 0,
@@ -707,8 +710,11 @@ export default function AcademicScoringPage() {
           });
         }
       }
+      if (updates.length > 0) {
+        await bulkUpdateStudentScores(adminSession.token, updates);
+      }
     } catch (e) {
-      console.warn("Background attendance sync:", e);
+      console.warn("Background attendance sync notice:", e);
     } finally {
       setAttendanceSaving(false);
     }

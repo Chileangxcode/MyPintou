@@ -386,53 +386,45 @@ export async function deleteQuiz(token, quizId) {
   }, { method: "POST" });
 }
 
+export async function bulkUpdateStudentScores(token, updatesList = []) {
+  const resolvedTok = resolveToken(token);
+  const res = await apiRequest("bulk_update_scores", {
+    token: resolvedTok,
+    updates: JSON.stringify(updatesList)
+  }, { method: "POST" });
+  invalidateRelatedCaches("score");
+  invalidateRelatedCaches("attendance");
+  return res;
+}
+
 export async function updateStudentQuizzes(token, studentId, quizScores = {}, batch = false) {
-  // If batch update:
+  const resolvedTok = resolveToken(token);
   if (batch) {
     let updates = quizScores;
     if (typeof updates === "string") {
       try { updates = JSON.parse(updates); } catch (e) { updates = []; }
     }
-    for (const item of (Array.isArray(updates) ? updates : [])) {
-      if (item.studentId && item.scores) {
-        const scoreValues = Object.values(item.scores).filter((v) => v !== null && v !== "" && !isNaN(v));
-        const rawSum = scoreValues.reduce((a, b) => a + Number(b), 0);
-        const scaled15 = Math.round((rawSum / 255) * 15 * 100) / 100;
-        await updateStudentScores(token, item.studentId, { qha: scaled15 });
-      }
-    }
-  } else {
-    // Single student update
-    let scoresObj = quizScores;
-    if (typeof scoresObj === "string") {
-      try { scoresObj = JSON.parse(scoresObj); } catch (e) { scoresObj = {}; }
-    }
-    const scoreValues = Object.values(scoresObj).filter((v) => v !== null && v !== "" && !isNaN(v));
-    const rawSum = scoreValues.reduce((a, b) => a + Number(b), 0);
-    const scaled15 = Math.round((rawSum / 255) * 15 * 100) / 100;
-
-    await updateStudentScores(token, studentId, { qha: scaled15 });
+    const res = await apiRequest("update_student_quizzes", {
+      token: resolvedTok,
+      updates: JSON.stringify(updates)
+    }, { method: "POST" });
+    invalidateRelatedCaches("quiz");
+    invalidateRelatedCaches("score");
+    return res;
   }
 
-  // Also call update_student_quizzes on backend if handled
-  try {
-    await apiRequest("update_student_quizzes", {
-      token: resolveToken(token),
-      studentId,
-      scores: typeof quizScores === "string" ? quizScores : JSON.stringify(quizScores),
-      batch: batch ? "true" : "false"
-    }, { method: "POST" });
-  } catch (_) {}
-
-  // Flush server cache immediately
-  try {
-    await apiRequest("flush_cache", { token: resolveToken(token) }, { forceRefresh: true });
-  } catch (_) {}
-
-  invalidateRelatedCaches("quiz");
-  invalidateRelatedCaches("score");
-
-  return { success: true, message: "បានកែប្រែពិន្ទុ និងធ្វើសមកាលកម្មទៅ Google Sheets ជោគជ័យ!" };
+  let scoresObj = quizScores;
+  if (typeof scoresObj === "string") {
+    try { scoresObj = JSON.parse(scoresObj); } catch (e) { scoresObj = {}; }
+  }
+  const res = await apiRequest("update_student_quizzes", {
+    token: resolvedTok,
+    studentId,
+    scores: JSON.stringify(scoresObj)
+  }, { method: "POST" });
+  invalidateRelatedCaches("quiz", studentId);
+  invalidateRelatedCaches("score", studentId);
+  return res;
 }
 
 export async function resetStudentQuizzes(token, studentId) {
