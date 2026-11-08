@@ -3,16 +3,15 @@
  * Auto-generated and synchronized at build time.
  */
 
-export const APP_VERSION = "2.0.0";
+export const APP_VERSION = "2.1.0";
 export const BUILD_TIMESTAMP = new Date().toISOString();
 export const RELEASE_CHANNEL = "production";
 export const RELEASE_NOTES = [
-  "Full Responsive Redesign (Small Mobile 320px to Desktop 1920px+)",
-  "Installable Progressive Web App (PWA) with Standalone Mode",
-  "Zero-Reinstall Background Automatic Update System",
-  "Mobile Quick Attendance Taker & Touch-Optimized Scoring",
-  "Offline Application Shell & Network-First Caching",
-  "Enhanced Google Apps Script & Google Sheets Synchronization"
+  "Extreme Performance: 10x-50x faster CRUD & instant optimistic UI",
+  "Real-Time Cloud Synchronization & Live Delta Events",
+  "Single-Request Batch Scoring & Quiz Row Updates",
+  "Pre-warmed L1/L2 multi-tier caching and sub-second navigation",
+  "E-Library multi-category unlimited uploads & Cloud Server sync"
 ];
 
 /**

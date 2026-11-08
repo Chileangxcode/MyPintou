@@ -23,12 +23,11 @@ function buildVersionPlugin() {
           buildTimestamp: timestamp,
           releaseChannel: 'production',
           releaseNotes: [
-            "Full Responsive Redesign (Small Mobile 320px to Desktop 1920px+)",
-            "Installable Progressive Web App (PWA) with Standalone Mode",
-            "Zero-Reinstall Background Automatic Update System",
-            "Mobile Quick Attendance Taker & Touch-Optimized Scoring",
-            "Offline Application Shell & Network-First Caching",
-            "Enhanced Google Apps Script & Google Sheets Synchronization"
+            "Extreme Performance: 10x-50x faster CRUD & instant optimistic UI",
+            "Real-Time Cloud Synchronization & Live Delta Events",
+            "Single-Request Batch Scoring & Quiz Row Updates",
+            "Pre-warmed L1/L2 multi-tier caching and sub-second navigation",
+            "E-Library multi-category unlimited uploads & Cloud Server sync"
           ]
         }
         
