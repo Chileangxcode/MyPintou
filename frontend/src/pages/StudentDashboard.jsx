@@ -660,9 +660,6 @@ export default function StudentDashboard() {
         </div>
       </div>
 
-      {/* 4. Gamified Academic Badges & Trophies Showcase */}
-      <AcademicBadgesSection studentSession={studentSession} />
-
       {/* 4. Assessment Navigation Segment Switcher */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-2 rounded-2xl bg-slate-200/50 dark:bg-[#0c1427]/60 border border-slate-200/80 dark:border-white/10 backdrop-blur-md">
         <div className="flex flex-wrap items-center gap-1.5 font-khmer text-xs">
@@ -1308,6 +1305,9 @@ export default function StudentDashboard() {
           </div>
         </div>
       )}
+
+      {/* 7. Gamified Academic Badges & Trophies Showcase */}
+      <AcademicBadgesSection studentSession={studentSession} />
 
       {/* Course E-Library (បណ្ណាល័យឌីជីថល) & Cloud Live Auto-Sync Section */}
       <div className="p-6 rounded-3xl bg-white/85 dark:bg-[#0c1427]/85 border border-slate-200/90 dark:border-white/10 shadow-[0_10px_35px_rgba(0,0,0,0.1)] space-y-4 backdrop-blur-xl">
