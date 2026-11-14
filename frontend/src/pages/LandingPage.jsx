@@ -27,18 +27,49 @@ export default function LandingPage({ defaultTab = "student" }) {
     else setActiveTab("student");
   }, [searchParams, location.pathname]);
 
-  // Staff Form State
-  const [username, setUsername] = useState("");
+  // Staff Form State (with Save Login / Remember Me persistence)
+  const [username, setUsername] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_saved_staff_username") || "";
+    } catch {
+      return "";
+    }
+  });
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockActive, setCapsLockActive] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_remember_staff") !== "false";
+    } catch {
+      return true;
+    }
+  });
   const [staffError, setStaffError] = useState("");
 
-  // Student Form State
-  const [studentName, setStudentName] = useState("");
-  const [studentId, setStudentId] = useState("");
+  // Student Form State (with Save Login / Remember Me persistence)
+  const [studentName, setStudentName] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_saved_student_name") || "";
+    } catch {
+      return "";
+    }
+  });
+  const [studentId, setStudentId] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_saved_student_id") || "";
+    } catch {
+      return "";
+    }
+  });
   const [showStudentPassword, setShowStudentPassword] = useState(false);
+  const [rememberStudent, setRememberStudent] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_remember_student") !== "false";
+    } catch {
+      return true;
+    }
+  });
   const [studentError, setStudentError] = useState("");
 
   // Mascot Robot State
@@ -47,15 +78,20 @@ export default function LandingPage({ defaultTab = "student" }) {
 
   const { loginStudent, loginTeacherAdmin, loading, studentSession, adminSession } = useAuth();
 
-  // If already logged in, redirect appropriately
+  // If already logged in, automatically navigate straight to appropriate dashboard (Save Login Session)
   useEffect(() => {
-    // Only auto-redirect to admin if specifically on /teacher-login or ?tab=staff
+    // If user explicitly asks to switch account via query (?switch=true or ?logout=true), do not auto-redirect
+    if (searchParams.get("switch") === "true" || searchParams.get("logout") === "true") return;
+
     const isTeacherRoute = location.pathname.includes("/teacher") || searchParams.get("tab") === "staff";
     if (isTeacherRoute && adminSession) {
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard", { replace: true });
     } else if (studentSession) {
-      // If student session exists, redirect to student dashboard
-      navigate("/student/dashboard");
+      // If student session exists, redirect straight to student dashboard
+      navigate("/student/dashboard", { replace: true });
+    } else if (adminSession) {
+      // If admin session exists and no student session, automatically redirect to admin dashboard
+      navigate("/admin/dashboard", { replace: true });
     }
   }, [adminSession, studentSession, navigate, location.pathname, searchParams]);
 
@@ -68,24 +104,45 @@ export default function LandingPage({ defaultTab = "student" }) {
     }
   };
 
-  // Staff Login Submit
+  // Staff Login Submit (with Save Login)
   const handleStaffSubmit = async (e) => {
     e.preventDefault();
     setStaffError("");
     setRobotStatus("idle");
 
-    if (!username.trim() || !password) {
+    const trimmedUsername = username.trim();
+    if (!trimmedUsername || !password) {
       setStaffError("សូមបញ្ចូលឈ្មោះគណនី និងលេខសម្ងាត់របស់អ្នក។");
       setRobotStatus("error");
       return;
     }
 
-    const res = await loginTeacherAdmin(username.trim(), password);
+    const res = await loginTeacherAdmin(trimmedUsername, password);
     if (res.success) {
+      // Persist or clear saved staff credentials based on Remember Me
+      try {
+        if (rememberMe) {
+          localStorage.setItem("mypintou_saved_staff_username", trimmedUsername);
+          localStorage.setItem("mypintou_remember_staff", "true");
+        } else {
+          localStorage.removeItem("mypintou_saved_staff_username");
+          localStorage.setItem("mypintou_remember_staff", "false");
+        }
+        // Native Browser Credential Management API (prompts Keychain / Chrome Password Manager)
+        if (window.PasswordCredential && navigator.credentials) {
+          const cred = new window.PasswordCredential({
+            id: trimmedUsername,
+            password: password,
+            name: res.data?.displayName || trimmedUsername
+          });
+          navigator.credentials.store(cred).catch(() => {});
+        }
+      } catch (_) {}
+
       setRobotStatus("success");
       setTimeout(() => {
-        navigate("/admin/dashboard");
-      }, 500);
+        navigate("/admin/dashboard", { replace: true });
+      }, 400);
     } else {
       setRobotStatus("error");
       const raw = String(res.message || res.error || "").toLowerCase();
@@ -99,7 +156,7 @@ export default function LandingPage({ defaultTab = "student" }) {
     }
   };
 
-  // Student Lookup Submit
+  // Student Lookup / Login Submit (with Save Login)
   const handleStudentSubmit = async (e) => {
     e.preventDefault();
     setStudentError("");
@@ -121,10 +178,32 @@ export default function LandingPage({ defaultTab = "student" }) {
 
     const res = await loginStudent(trimmedName, trimmedId);
     if (res.success) {
+      // Persist or clear saved student credentials based on Save Login
+      try {
+        if (rememberStudent) {
+          localStorage.setItem("mypintou_saved_student_name", trimmedName);
+          localStorage.setItem("mypintou_saved_student_id", trimmedId);
+          localStorage.setItem("mypintou_remember_student", "true");
+        } else {
+          localStorage.removeItem("mypintou_saved_student_name");
+          localStorage.removeItem("mypintou_saved_student_id");
+          localStorage.setItem("mypintou_remember_student", "false");
+        }
+        // Native Browser Credential Management API (prompts Keychain / Chrome Password Manager)
+        if (window.PasswordCredential && navigator.credentials) {
+          const cred = new window.PasswordCredential({
+            id: trimmedName,
+            password: trimmedId,
+            name: trimmedName
+          });
+          navigator.credentials.store(cred).catch(() => {});
+        }
+      } catch (_) {}
+
       setRobotStatus("success");
       setTimeout(() => {
-        navigate("/student/dashboard");
-      }, 500);
+        navigate("/student/dashboard", { replace: true });
+      }, 400);
     } else {
       setRobotStatus("error");
       const raw = String(res.message || res.error || "").toLowerCase();
@@ -314,7 +393,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                       }}
                       className={`flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
                         activeTab === "student"
-                          ? "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-[0_4px_16px_rgba(6,182,212,0.4)]"
+                          ? "bg-blue-600 text-white shadow-[0_4px_16px_rgba(37,99,235,0.4)]"
                           : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
                       }`}
                     >
@@ -332,7 +411,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                       }}
                       className={`flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
                         activeTab === "staff"
-                          ? "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-[0_4px_16px_rgba(6,182,212,0.4)]"
+                          ? "bg-blue-600 text-white shadow-[0_4px_16px_rgba(37,99,235,0.4)]"
                           : "text-slate-400 hover:text-white hover:bg-white/[0.04]"
                       }`}
                     >
@@ -351,18 +430,20 @@ export default function LandingPage({ defaultTab = "student" }) {
 
                   {/* Staff Login Form */}
                   {activeTab === "staff" && (
-                    <form onSubmit={handleStaffSubmit} className="space-y-4">
+                    <form onSubmit={handleStaffSubmit} id="staff-login-form" name="staffLoginForm" method="POST" className="space-y-4">
                       {/* Username Input */}
                       <div className="space-y-1.5">
                         <label className="block text-xs font-semibold text-slate-300 font-khmer">
                           ឈ្មោះគណនី
                         </label>
                         <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-cyan-400 transition-colors">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-400 transition-colors">
                             <i className="fas fa-user text-sm" />
                           </div>
                           <input
                             type="text"
+                            id="staff-username"
+                            name="username"
                             value={username}
                             onChange={(e) => {
                               setUsername(e.target.value);
@@ -375,7 +456,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                             placeholder="បញ្ចូលឈ្មោះគណនីរបស់អ្នក"
                             autoComplete="username"
                             disabled={loading}
-                            className="w-full pl-11 pr-4 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-cyan-500/20 transition-all backdrop-blur-md"
+                            className="w-full pl-11 pr-4 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-md"
                             required
                           />
                         </div>
@@ -394,11 +475,13 @@ export default function LandingPage({ defaultTab = "student" }) {
                           )}
                         </div>
                         <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-cyan-400 transition-colors">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-400 transition-colors">
                             <i className="fas fa-lock text-sm" />
                           </div>
                           <input
                             type={showPassword ? "text" : "password"}
+                            id="staff-password"
+                            name="password"
                             value={password}
                             onChange={(e) => {
                               setPassword(e.target.value);
@@ -410,7 +493,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                             placeholder="••••••••"
                             autoComplete="current-password"
                             disabled={loading}
-                            className="w-full pl-11 pr-11 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-cyan-500/20 transition-all backdrop-blur-md"
+                            className="w-full pl-11 pr-11 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-md"
                             required
                           />
                           <button
@@ -426,19 +509,24 @@ export default function LandingPage({ defaultTab = "student" }) {
 
                       {/* Checkbox and Forgot Password */}
                       <div className="flex items-center justify-between pt-1 text-xs font-khmer">
-                        <label className="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-300">
+                        <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none group">
                           <input
                             type="checkbox"
+                            id="staff-remember-me"
+                            name="rememberMe"
                             checked={rememberMe}
                             onChange={(e) => setRememberMe(e.target.checked)}
-                            className="rounded border-slate-700 bg-white/5 text-cyan-500 focus:ring-0 focus:ring-offset-0"
+                            className="w-4 h-4 rounded border-slate-700 bg-white/5 text-blue-600 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-blue-600"
                           />
-                          <span>ចងចាំគណនី</span>
+                          <span className="flex items-center gap-1.5 font-medium">
+                            <i className="fas fa-bookmark text-[11px] text-blue-400 group-hover:scale-110 transition-transform" />
+                            <span>ចងចាំគណនី (Save Login)</span>
+                          </span>
                         </label>
                         <button
                           type="button"
                           onClick={() => alert("សូមទាក់ទងអ្នកគ្រប់គ្រងប្រព័ន្ធ (Admin) ឬ Telegram @LeangOCL ដើម្បីកំណត់លេខសម្ងាត់ឡើងវិញ។")}
-                          className="text-cyan-400 hover:text-cyan-300 hover:underline cursor-pointer"
+                          className="text-blue-400 hover:text-blue-300 hover:underline cursor-pointer"
                         >
                           ភ្លេចលេខសម្ងាត់?
                         </button>
@@ -448,7 +536,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-[0_8px_30px_rgba(6,182,212,0.4)] hover:shadow-[0_8px_40px_rgba(6,182,212,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
+                        className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-blue-600 hover:bg-blue-500 shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
                       >
                         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] group-hover/btn:animate-shine pointer-events-none" />
                         
@@ -471,18 +559,45 @@ export default function LandingPage({ defaultTab = "student" }) {
 
                   {/* Student Lookup Form */}
                   {activeTab === "student" && (
-                    <form onSubmit={handleStudentSubmit} className="space-y-4">
+                    <form onSubmit={handleStudentSubmit} id="student-login-form" name="studentLoginForm" method="POST" className="space-y-4">
+                      {/* Saved Login Indicator Chip */}
+                      {rememberStudent && studentName && studentId && (
+                        <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-between text-xs text-blue-300 font-khmer animate-fade-in">
+                          <div className="flex items-center gap-2">
+                            <i className="fas fa-shield-check text-blue-400" />
+                            <span>បានរក្សាទុក៖ <strong>{studentName}</strong> ({studentId})</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setStudentName("");
+                              setStudentId("");
+                              try {
+                                localStorage.removeItem("mypintou_saved_student_name");
+                                localStorage.removeItem("mypintou_saved_student_id");
+                              } catch (_) {}
+                            }}
+                            className="text-[11px] text-slate-400 hover:text-rose-400 underline cursor-pointer"
+                            title="លុបព័ត៌មានដែលបានរក្សាទុក"
+                          >
+                            លុបការចងចាំ
+                          </button>
+                        </div>
+                      )}
+
                       {/* Student Name (Username) */}
                       <div className="space-y-1.5">
                         <label className="block text-xs font-semibold text-slate-300 font-khmer">
                           ឈ្មោះនិស្សិត (ឈ្មោះខ្មែរ ឬ អក្សរឡាតាំង / English & Khmer Name)
                         </label>
                         <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-cyan-400 transition-colors">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-400 transition-colors">
                             <i className="fas fa-user-tag text-sm" />
                           </div>
                           <input
                             type="text"
+                            id="student-name"
+                            name="studentName"
                             value={studentName}
                             onChange={(e) => {
                               setStudentName(e.target.value);
@@ -495,7 +610,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                             placeholder="ឈ្មោះជាភាសាខ្មែរ ឬ អក្សរឡាតាំង (ឧ. កោ អារីហ្សា ឬ KOR ARYSHA)"
                             autoComplete="username"
                             disabled={loading}
-                            className="w-full pl-11 pr-4 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-cyan-500/20 transition-all backdrop-blur-md font-khmer"
+                            className="w-full pl-11 pr-4 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-md font-khmer"
                             required
                           />
                         </div>
@@ -509,11 +624,13 @@ export default function LandingPage({ defaultTab = "student" }) {
                           </label>
                         </div>
                         <div className="relative group">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-cyan-400 transition-colors">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-400 transition-colors">
                             <i className="fas fa-lock text-sm" />
                           </div>
                           <input
                             type={showStudentPassword ? "text" : "password"}
+                            id="student-id"
+                            name="studentId"
                             value={studentId}
                             onChange={(e) => {
                               setStudentId(e.target.value);
@@ -524,7 +641,7 @@ export default function LandingPage({ defaultTab = "student" }) {
                             placeholder="បញ្ចូលលេខសម្គាល់និស្សិត..."
                             autoComplete="current-password"
                             disabled={loading}
-                            className="w-full pl-11 pr-11 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-cyan-500/20 transition-all backdrop-blur-md font-mono"
+                            className="w-full pl-11 pr-11 py-3 bg-white/[0.04] border border-white/10 rounded-2xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-400/80 focus:bg-white/[0.08] focus:ring-4 focus:ring-blue-500/20 transition-all backdrop-blur-md font-mono"
                             required
                           />
                           <button
@@ -538,11 +655,32 @@ export default function LandingPage({ defaultTab = "student" }) {
                         </div>
                       </div>
 
+                      {/* Student Remember Me & Save Login */}
+                      <div className="flex items-center justify-between pt-1 text-xs font-khmer">
+                        <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none group">
+                          <input
+                            type="checkbox"
+                            id="student-remember-me"
+                            name="rememberStudent"
+                            checked={rememberStudent}
+                            onChange={(e) => setRememberStudent(e.target.checked)}
+                            className="w-4 h-4 rounded border-slate-700 bg-white/5 text-blue-600 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-blue-600"
+                          />
+                          <span className="flex items-center gap-1.5 font-medium">
+                            <i className="fas fa-bookmark text-[11px] text-blue-400 group-hover:scale-110 transition-transform" />
+                            <span>ចងចាំការចូល (Save Login)</span>
+                          </span>
+                        </label>
+                        <span className="text-[11px] text-slate-400">
+                          មិនបាច់វាយឈ្មោះឡើងវិញ
+                        </span>
+                      </div>
+
                       {/* Submit Button */}
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-[0_8px_30px_rgba(6,182,212,0.4)] hover:shadow-[0_8px_40px_rgba(6,182,212,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
+                        className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-blue-600 hover:bg-blue-500 shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
                       >
                         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] group-hover/btn:animate-shine pointer-events-none" />
                         

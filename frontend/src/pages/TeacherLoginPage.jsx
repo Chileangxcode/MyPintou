@@ -6,17 +6,36 @@ import ThemeToggle from "../components/ThemeToggle.jsx";
 import BrandLogo from "../components/BrandLogo.jsx";
 
 export default function TeacherLoginPage() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_saved_staff_username") || "";
+    } catch {
+      return "";
+    }
+  });
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockActive, setCapsLockActive] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_remember_staff") !== "false";
+    } catch {
+      return true;
+    }
+  });
   const [validationError, setValidationError] = useState("");
   const [robotStatus, setRobotStatus] = useState("idle");
   const [isTypingPassword, setIsTypingPassword] = useState(false);
 
-  const { loginTeacherAdmin, loading, error } = useAuth();
+  const { loginTeacherAdmin, loading, error, adminSession } = useAuth();
   const navigate = useNavigate();
+
+  // If already authenticated as admin, automatically redirect to admin dashboard
+  React.useEffect(() => {
+    if (adminSession) {
+      navigate("/admin/dashboard", { replace: true });
+    }
+  }, [adminSession, navigate]);
 
   const handleKeyDown = (e) => {
     if (e.getModifierState && e.getModifierState("CapsLock")) {
@@ -31,18 +50,37 @@ export default function TeacherLoginPage() {
     setValidationError("");
     setRobotStatus("idle");
 
-    if (!username.trim() || !password) {
+    const trimmedUser = username.trim();
+    if (!trimmedUser || !password) {
       setValidationError("សូមបំពេញឈ្មោះគណនី និងលេខសម្ងាត់របស់អ្នក។");
       setRobotStatus("error");
       return;
     }
 
-    const res = await loginTeacherAdmin(username.trim(), password);
+    const res = await loginTeacherAdmin(trimmedUser, password);
     if (res.success) {
+      try {
+        if (rememberMe) {
+          localStorage.setItem("mypintou_saved_staff_username", trimmedUser);
+          localStorage.setItem("mypintou_remember_staff", "true");
+        } else {
+          localStorage.removeItem("mypintou_saved_staff_username");
+          localStorage.setItem("mypintou_remember_staff", "false");
+        }
+        if (window.PasswordCredential && navigator.credentials) {
+          const cred = new window.PasswordCredential({
+            id: trimmedUser,
+            password: password,
+            name: res.data?.displayName || trimmedUser
+          });
+          navigator.credentials.store(cred).catch(() => {});
+        }
+      } catch (_) {}
+
       setRobotStatus("success");
       setTimeout(() => {
-        navigate("/admin/dashboard");
-      }, 500);
+        navigate("/admin/dashboard", { replace: true });
+      }, 400);
     } else {
       setRobotStatus("error");
     }
@@ -168,14 +206,17 @@ export default function TeacherLoginPage() {
               </div>
 
               <div className="flex items-center justify-between pt-1 text-xs font-khmer">
-                <label className="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-300">
+                <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none">
                   <input
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    className="rounded border-slate-700 bg-white/5 text-blue-600 focus:ring-0"
+                    className="w-4 h-4 rounded border-slate-700 bg-white/5 text-blue-600 focus:ring-0 cursor-pointer accent-blue-600"
                   />
-                  <span>ចងចាំគណនី</span>
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <i className="fas fa-bookmark text-[11px] text-blue-400" />
+                    <span>ចងចាំគណនី (Save Login)</span>
+                  </span>
                 </label>
                 <Link to="/" className="text-blue-400 hover:text-blue-300 hover:underline">
                   ត្រឡប់ទៅទំព័រដើម
@@ -185,7 +226,7 @@ export default function TeacherLoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
+                className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-blue-600 hover:bg-blue-500 shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
               >
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] group-hover/btn:animate-shine pointer-events-none" />
                 <div className="flex items-center justify-center gap-2">

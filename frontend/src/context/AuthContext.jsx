@@ -30,8 +30,15 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Save student session to both sessionStorage and localStorage
+  const isInitialMountStudent = React.useRef(true);
+  const isInitialMountAdmin = React.useRef(true);
+
+  // Save student session to both sessionStorage and localStorage (Safe against hydration wipes)
   useEffect(() => {
+    if (isInitialMountStudent.current) {
+      isInitialMountStudent.current = false;
+      if (!studentSession) return;
+    }
     if (studentSession) {
       try {
         const val = JSON.stringify(studentSession);
@@ -46,8 +53,12 @@ export function AuthProvider({ children }) {
     }
   }, [studentSession]);
 
-  // Save admin session to both sessionStorage and localStorage
+  // Save admin session to both sessionStorage and localStorage (Safe against hydration wipes)
   useEffect(() => {
+    if (isInitialMountAdmin.current) {
+      isInitialMountAdmin.current = false;
+      if (!adminSession) return;
+    }
     if (adminSession) {
       try {
         const val = JSON.stringify(adminSession);

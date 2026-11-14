@@ -7,14 +7,40 @@ import ThemeToggle from "../components/ThemeToggle.jsx";
 import BrandLogo from "../components/BrandLogo.jsx";
 
 export default function StudentLoginPage() {
-  const [studentId, setStudentId] = useState("");
-  const [studentName, setStudentName] = useState("");
+  const [studentName, setStudentName] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_saved_student_name") || "";
+    } catch {
+      return "";
+    }
+  });
+  const [studentId, setStudentId] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_saved_student_id") || "";
+    } catch {
+      return "";
+    }
+  });
+  const [rememberStudent, setRememberStudent] = useState(() => {
+    try {
+      return localStorage.getItem("mypintou_remember_student") !== "false";
+    } catch {
+      return true;
+    }
+  });
   const [validationError, setValidationError] = useState("");
   const [robotStatus, setRobotStatus] = useState("idle");
 
-  const { loginStudent, loading, error } = useAuth();
+  const { loginStudent, loading, error, studentSession } = useAuth();
   const { schoolInfo } = useSchool();
   const navigate = useNavigate();
+
+  // If already authenticated as student, automatically redirect to dashboard
+  React.useEffect(() => {
+    if (studentSession) {
+      navigate("/student/dashboard", { replace: true });
+    }
+  }, [studentSession, navigate]);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,10 +65,30 @@ export default function StudentLoginPage() {
 
     const res = await loginStudent(trimmedName, trimmedId);
     if (res.success) {
+      try {
+        if (rememberStudent) {
+          localStorage.setItem("mypintou_saved_student_name", trimmedName);
+          localStorage.setItem("mypintou_saved_student_id", trimmedId);
+          localStorage.setItem("mypintou_remember_student", "true");
+        } else {
+          localStorage.removeItem("mypintou_saved_student_name");
+          localStorage.removeItem("mypintou_saved_student_id");
+          localStorage.setItem("mypintou_remember_student", "false");
+        }
+        if (window.PasswordCredential && navigator.credentials) {
+          const cred = new window.PasswordCredential({
+            id: trimmedName,
+            password: trimmedId,
+            name: trimmedName
+          });
+          navigator.credentials.store(cred).catch(() => {});
+        }
+      } catch (_) {}
+
       setRobotStatus("success");
       setTimeout(() => {
-        navigate("/student/dashboard");
-      }, 500);
+        navigate("/student/dashboard", { replace: true });
+      }, 400);
     } else {
       setRobotStatus("error");
     }
@@ -173,18 +219,32 @@ export default function StudentLoginPage() {
               </div>
 
               <div className="flex items-center justify-between pt-1 text-xs font-khmer">
-                <Link to="/" className="text-blue-400 hover:text-blue-300 hover:underline">
-                  ← ត្រឡប់ទៅទំព័រដើម
-                </Link>
-                <Link to="/teacher-login" className="text-slate-400 hover:text-white">
-                  ច្រកសាស្ត្រាចារ្យ →
-                </Link>
+                <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none">
+                  <input
+                    type="checkbox"
+                    checked={rememberStudent}
+                    onChange={(e) => setRememberStudent(e.target.checked)}
+                    className="w-4 h-4 rounded border-slate-700 bg-white/5 text-blue-600 focus:ring-0 cursor-pointer accent-blue-600"
+                  />
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <i className="fas fa-bookmark text-[11px] text-blue-400" />
+                    <span>ចងចាំការចូល (Save Login)</span>
+                  </span>
+                </label>
+                <div className="flex items-center gap-3">
+                  <Link to="/" className="text-blue-400 hover:text-blue-300 hover:underline">
+                    ទំព័រដើម
+                  </Link>
+                  <Link to="/teacher-login" className="text-slate-400 hover:text-white">
+                    ច្រកគ្រូ →
+                  </Link>
+                </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
+                className="w-full mt-4 py-3.5 rounded-2xl font-bold text-white text-base bg-blue-600 hover:bg-blue-500 shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_8px_40px_rgba(37,99,235,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 relative overflow-hidden group/btn cursor-pointer font-khmer"
               >
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] group-hover/btn:animate-shine pointer-events-none" />
                 <div className="flex items-center justify-center gap-2">

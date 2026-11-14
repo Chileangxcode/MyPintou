@@ -3,14 +3,14 @@
  * Auto-generated and synchronized at build time.
  */
 
-export const APP_VERSION = "2.2.2";
+export const APP_VERSION = "2.2.3";
 export const BUILD_TIMESTAMP = new Date().toISOString();
 export const RELEASE_CHANNEL = "production";
 export const RELEASE_NOTES = [
-  "Unified Royal Blue (#2563EB) single-color academic brand identity",
-  "Eliminated rainbow multi-color gradients across badges, buttons, and banners",
-  "Tailwind CSS v4 Royal Blue theme aliasing for crisp visual harmony",
-  "Mobile Navigation & Safe-Area Ergonomics with zero footer clipping"
+  "Save Login: Automatic persistent sessions and credential remembering for students and staff",
+  "Smart Redirect: Instant routing to Student or Admin Dashboard upon return",
+  "Native Browser Password Manager / Keychain credential save support",
+  "One-tap saved credential chip and clear-login convenience options"
 ];
 
 /**

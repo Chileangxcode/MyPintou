@@ -1,11 +1,11 @@
 {
-  "version": "2.2.2",
-  "buildTimestamp": "2026-11-14T03:32:47.161Z",
+  "version": "2.2.3",
+  "buildTimestamp": "2026-11-14T03:44:00.126Z",
   "releaseChannel": "production",
   "releaseNotes": [
-    "Unified Royal Blue (#2563EB) single-color academic brand identity",
-    "Eliminated rainbow multi-color gradients across badges, buttons, and banners",
-    "Tailwind CSS v4 Royal Blue theme aliasing for crisp visual harmony",
-    "Mobile Navigation & Safe-Area Ergonomics with zero footer clipping"
+    "Save Login: Automatic persistent sessions and credential remembering for students and staff",
+    "Smart Redirect: Instant routing to Student or Admin Dashboard upon return",
+    "Native Browser Password Manager / Keychain credential save support",
+    "One-tap saved credential chip and clear-login convenience options"
   ]
 }
