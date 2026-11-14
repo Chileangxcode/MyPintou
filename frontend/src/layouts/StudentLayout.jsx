@@ -11,7 +11,7 @@ import { APP_VERSION, checkForAppUpdates } from "../version.js";
 import { triggerPWAInstall } from "../utils/pwaManager.js";
 
 export default function StudentLayout() {
-  const { studentSession, isStudentAuthenticated, refreshStudentScores, logoutStudent, loading } = useAuth();
+  const { studentSession, isStudentAuthenticated, refreshStudentScores, logoutStudent, loading, adminSession } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [updateChecking, setUpdateChecking] = useState(false);
   const [updateStatus, setUpdateStatus] = useState("");
@@ -280,6 +280,18 @@ export default function StudentLayout() {
                   </span>
                 </div>
 
+                {/* Admin Quick Return Switcher (Shown if Admin is logged in) */}
+                {adminSession && (
+                  <Link
+                    to="/admin/dashboard"
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm min-h-[44px]"
+                    title="ត្រឡប់ទៅផ្ទាំងគ្រប់គ្រង Admin"
+                  >
+                    <i className="fas fa-shield-halved text-xs" />
+                    <span className="font-khmer hidden sm:inline text-[11px]">ទៅកាន់ Admin</span>
+                  </Link>
+                )}
+
                 {/* PWA App Install Button (Near Logout) */}
                 <button
                   type="button"
@@ -360,6 +372,18 @@ export default function StudentLayout() {
                   ពិនិត្យកំណែថ្មី
                 </button>
               </div>
+
+              {/* Admin Return Button for Mobile Drawer */}
+              {adminSession && (
+                <Link
+                  to="/admin/dashboard"
+                  onClick={() => setSidebarOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs min-h-[44px] cursor-pointer shadow-md font-khmer"
+                >
+                  <i className="fas fa-shield-halved text-xs" />
+                  <span>ត្រឡប់ទៅ Admin Panel</span>
+                </Link>
+              )}
 
               {/* Install PWA Button in Mobile Drawer */}
               <button

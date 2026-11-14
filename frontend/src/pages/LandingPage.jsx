@@ -10,10 +10,21 @@ export default function LandingPage({ defaultTab = "student" }) {
   const [searchParams] = useSearchParams();
   const location = useLocation();
 
+  const { loginStudent, loginTeacherAdmin, loading, studentSession, adminSession } = useAuth();
+
   const getInitialTab = () => {
     const qTab = searchParams.get("tab");
     if (qTab === "staff" || qTab === "teacher" || qTab === "admin") return "staff";
     if (location.pathname.includes("/teacher")) return "staff";
+    if (
+      location.pathname === "/student-lookup" ||
+      location.pathname === "/student-login" ||
+      searchParams.get("role") === "student"
+    ) {
+      return "student";
+    }
+    // If only admin is logged in (and not on student path), default to staff tab
+    if (adminSession && !studentSession) return "staff";
     return "student";
   };
 
@@ -24,8 +35,18 @@ export default function LandingPage({ defaultTab = "student" }) {
     const qTab = searchParams.get("tab");
     if (qTab === "staff" || qTab === "teacher" || qTab === "admin") setActiveTab("staff");
     else if (location.pathname.includes("/teacher")) setActiveTab("staff");
-    else setActiveTab("student");
-  }, [searchParams, location.pathname]);
+    else if (
+      location.pathname === "/student-lookup" ||
+      location.pathname === "/student-login" ||
+      searchParams.get("role") === "student"
+    ) {
+      setActiveTab("student");
+    } else if (adminSession && !studentSession) {
+      setActiveTab("staff");
+    } else {
+      setActiveTab("student");
+    }
+  }, [searchParams, location.pathname, adminSession, studentSession]);
 
   // Staff Form State (with Save Login / Remember Me persistence)
   const [username, setUsername] = useState(() => {
@@ -76,24 +97,52 @@ export default function LandingPage({ defaultTab = "student" }) {
   const [robotStatus, setRobotStatus] = useState("idle"); // "idle" | "error" | "success"
   const [isTypingPassword, setIsTypingPassword] = useState(false);
 
-  const { loginStudent, loginTeacherAdmin, loading, studentSession, adminSession } = useAuth();
-
-  // If already logged in, automatically navigate straight to appropriate dashboard (Save Login Session)
+  // If already logged in, automatically navigate straight to appropriate dashboard (with Student Route Safeguard)
   useEffect(() => {
     // If user explicitly asks to switch account via query (?switch=true or ?logout=true), do not auto-redirect
     if (searchParams.get("switch") === "true" || searchParams.get("logout") === "true") return;
 
-    const isTeacherRoute = location.pathname.includes("/teacher") || searchParams.get("tab") === "staff";
+    // Check if the current route is specifically intended for students
+    const isExplicitStudentRoute =
+      location.pathname === "/student-lookup" ||
+      location.pathname === "/student-login" ||
+      searchParams.get("role") === "student" ||
+      searchParams.get("tab") === "student";
+
+    if (isExplicitStudentRoute) {
+      // CRITICAL: NEVER redirect to the Admin Dashboard when on the student portal!
+      // If there is an active student session, navigate to the student dashboard.
+      if (studentSession && searchParams.get("lookup") !== "true") {
+        navigate("/student/dashboard", { replace: true });
+      }
+      return;
+    }
+
+    // Check if specifically on teacher route
+    const isTeacherRoute =
+      location.pathname.includes("/teacher") ||
+      searchParams.get("tab") === "staff" ||
+      searchParams.get("tab") === "admin" ||
+      searchParams.get("role") === "staff";
+
     if (isTeacherRoute && adminSession) {
       navigate("/admin/dashboard", { replace: true });
-    } else if (studentSession) {
-      // If student session exists, redirect straight to student dashboard
-      navigate("/student/dashboard", { replace: true });
-    } else if (adminSession) {
-      // If admin session exists and no student session, automatically redirect to admin dashboard
-      navigate("/admin/dashboard", { replace: true });
+      return;
     }
-  }, [adminSession, studentSession, navigate, location.pathname, searchParams]);
+
+    // On generic root "/" or "/login":
+    // 1) If student session exists, redirect straight to student dashboard
+    if (studentSession) {
+      navigate("/student/dashboard", { replace: true });
+      return;
+    }
+
+    // 2) If admin session exists and activeTab is staff, navigate to admin dashboard
+    if (adminSession && activeTab === "staff") {
+      navigate("/admin/dashboard", { replace: true });
+      return;
+    }
+  }, [adminSession, studentSession, navigate, location.pathname, searchParams, activeTab]);
 
   // Detect Caps Lock on keydown
   const handleKeyDown = (e) => {

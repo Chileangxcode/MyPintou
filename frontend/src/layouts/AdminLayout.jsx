@@ -277,9 +277,10 @@ export default function AdminLayout() {
             {/* Quick Student Link */}
             <div className="pt-2 px-1">
               <Link
-                to="/student-lookup"
+                to="/student-lookup?tab=student&role=student"
                 target="_blank"
-                className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 hover:border-blue-500/40 transition-all group font-khmer"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 hover:border-blue-500/40 transition-all group font-khmer cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <i className="fas fa-external-link-alt text-[10px] text-blue-400 group-hover:scale-110 transition-transform" />
@@ -467,6 +468,21 @@ export default function AdminLayout() {
                   ពិនិត្យកំណែថ្មី
                 </button>
               </div>
+
+              {/* Quick Student Link in Mobile Drawer */}
+              <Link
+                to="/student-lookup?tab=student&role=student"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setSidebarOpen(false)}
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 transition-all font-khmer min-h-[44px]"
+              >
+                <span className="flex items-center gap-2">
+                  <i className="fas fa-external-link-alt text-[11px] text-blue-400" />
+                  <span>បើកផ្ទាំងនិស្សិត</span>
+                </span>
+                <i className="fas fa-arrow-right text-[10px] text-slate-500" />
+              </Link>
 
               {/* Install PWA Button in Mobile Drawer */}
               <button

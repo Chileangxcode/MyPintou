@@ -23,10 +23,10 @@ function buildVersionPlugin() {
           buildTimestamp: timestamp,
           releaseChannel: 'production',
           releaseNotes: [
-            "Save Login: Automatic persistent sessions and credential remembering for students and staff",
-            "Smart Redirect: Instant routing to Student or Admin Dashboard upon return",
-            "Native Browser Password Manager / Keychain credential save support",
-            "One-tap saved credential chip and clear-login convenience options"
+            "Fix: 'Open Student' portal navigation from Admin Panel now strictly prevents auto-redirecting to Admin",
+            "Explicit student route safeguard ensures clean student lookup without admin collision",
+            "Added convenient one-tap 'Return to Admin' button on Student Layout when Admin is logged in",
+            "Persistent save login and cross-role session isolation"
           ]
         }
         
