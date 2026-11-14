@@ -118,9 +118,9 @@ export default function StudentDashboard() {
       return {
         level: 5,
         titleKh: "Level 5 • កំពូលបញ្ញវន្ត (Master Scholar)",
-        badgeBg: "from-amber-400 via-yellow-300 to-emerald-400 text-slate-900",
-        glow: "shadow-[0_0_25px_rgba(245,158,11,0.5)]",
-        border: "border-amber-400/50",
+        badgeBg: "from-blue-600 via-blue-500 to-indigo-600 text-white",
+        glow: "shadow-[0_0_25px_rgba(37,99,235,0.4)]",
+        border: "border-blue-400/50",
         motto: "លទ្ធផលឆ្នើមបំផុត! អ្នកស្ថិតក្នុងលំដាប់ពិន្ទុកំពូល (Top Tier Excellence) 🌟",
         nextTier: null,
         pointsNeeded: 0
@@ -130,9 +130,9 @@ export default function StudentDashboard() {
       return {
         level: 4,
         titleKh: "Level 4 • តារាឆ្នើម (Star Prodigy)",
-        badgeBg: "from-cyan-400 via-blue-500 to-indigo-500 text-white",
-        glow: "shadow-[0_0_25px_rgba(6,182,212,0.5)]",
-        border: "border-cyan-400/50",
+        badgeBg: "from-blue-600 to-blue-500 text-white",
+        glow: "shadow-[0_0_20px_rgba(37,99,235,0.35)]",
+        border: "border-blue-400/50",
         motto: `ពិន្ទុល្អណាស់! នៅសល់តែ ${Math.max(0, (85 - score)).toFixed(1)} ពិន្ទុទៀតដើម្បីឡើងដល់និទ្ទេស A 🚀`,
         nextTier: "A (៨៥%)",
         pointsNeeded: Math.max(0, 85 - score).toFixed(1)
@@ -142,9 +142,9 @@ export default function StudentDashboard() {
       return {
         level: 3,
         titleKh: "Level 3 • និស្សិតកិត្តិយស (Honor Student)",
-        badgeBg: "from-blue-500 via-indigo-500 to-purple-600 text-white",
-        glow: "shadow-[0_0_20px_rgba(59,130,246,0.4)]",
-        border: "border-blue-400/50",
+        badgeBg: "from-blue-700 to-blue-600 text-white",
+        glow: "shadow-[0_0_15px_rgba(37,99,235,0.25)]",
+        border: "border-blue-400/40",
         motto: `លទ្ធផលល្អប្រសើរ! នៅសល់តែ ${Math.max(0, (80 - score)).toFixed(1)} ពិន្ទុទៀតដើម្បីឈានដល់និទ្ទេស B+ ⚡`,
         nextTier: "B+ (៨០%)",
         pointsNeeded: Math.max(0, 80 - score).toFixed(1)
@@ -154,9 +154,9 @@ export default function StudentDashboard() {
       return {
         level: 2,
         titleKh: "Level 2 • និស្សិតរីកចម្រើន (Rising Achiever)",
-        badgeBg: "from-teal-400 to-emerald-500 text-white",
-        glow: "shadow-[0_0_20px_rgba(20,184,166,0.4)]",
-        border: "border-teal-400/50",
+        badgeBg: "from-slate-800 to-blue-900 text-blue-200",
+        glow: "shadow-[0_0_10px_rgba(37,99,235,0.15)]",
+        border: "border-blue-500/30",
         motto: `នៅសល់តែ ${Math.max(0, (70 - score)).toFixed(1)} ពិន្ទុទៀតដើម្បីឈានដល់និទ្ទេស B ✨`,
         nextTier: "B (៧០%)",
         pointsNeeded: Math.max(0, 70 - score).toFixed(1)
@@ -166,9 +166,9 @@ export default function StudentDashboard() {
       return {
         level: 1,
         titleKh: "Level 1 • កម្រិតឆ្លងផុត (Passing Tier)",
-        badgeBg: "from-amber-400 to-orange-500 text-slate-950",
-        glow: "shadow-[0_0_15px_rgba(245,158,11,0.3)]",
-        border: "border-amber-400/40",
+        badgeBg: "bg-slate-800 text-blue-300",
+        glow: "shadow-none",
+        border: "border-blue-500/20",
         motto: `ជាប់កម្រិតស្តង់ដារ! នៅសល់តែ ${Math.max(0, (65 - score)).toFixed(1)} ពិន្ទុទៀតដើម្បីឡើងដល់និទ្ទេស C+ 🎯`,
         nextTier: "C+ (៦៥%)",
         pointsNeeded: Math.max(0, 65 - score).toFixed(1)
@@ -177,9 +177,9 @@ export default function StudentDashboard() {
     return {
       level: 0,
       titleKh: "ត្រូវការការខិតខំបន្ថែម (Needs Boost)",
-      badgeBg: "from-rose-500 to-pink-600 text-white",
-      glow: "shadow-[0_0_15px_rgba(244,63,94,0.3)]",
-      border: "border-rose-400/40",
+      badgeBg: "bg-slate-800 text-slate-300",
+      glow: "shadow-none",
+      border: "border-slate-700",
       motto: `ត្រូវការ ${Math.max(0, (50 - score)).toFixed(1)} ពិន្ទុបន្ថែមទៀតដើម្បីឆ្លងផុតកម្រិតជាប់ ៥០% (និទ្ទេស C) 💪`,
       nextTier: "C (៥០%)",
       pointsNeeded: Math.max(0, 50 - score).toFixed(1)
@@ -374,13 +374,13 @@ export default function StudentDashboard() {
       {/* School Announcements & Broadcast Alert Banner */}
       <StudentAnnouncementBanner />
 
-      {/* 1. Futuristic Cyber-GenZ Hero Banner with Dynamic School Branding */}
-      <div className="relative p-[1.5px] rounded-[32px] bg-gradient-to-r from-cyan-400 via-pink-500 to-indigo-600 shadow-[0_15px_50px_rgba(6,182,212,0.25)] group">
+      {/* 1. Academic Hero Banner with Unified Royal Blue Branding */}
+      <div className="relative p-[1.5px] rounded-[32px] bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_15px_40px_rgba(37,99,235,0.2)] group">
         <div className="relative rounded-[30.5px] bg-[#0c1427]/95 backdrop-blur-2xl p-6 sm:p-8 overflow-hidden text-white border border-white/10 space-y-6">
-          {/* Cyber Ambient Meshes */}
-          <div className="cyber-grid absolute inset-0 opacity-25 pointer-events-none" />
-          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-cyan-500/20 blur-3xl pointer-events-none group-hover:bg-cyan-500/30 transition-all duration-700" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
+          {/* Ambient Meshes */}
+          <div className="cyber-grid absolute inset-0 opacity-20 pointer-events-none" />
+          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-600/15 blur-3xl pointer-events-none group-hover:bg-blue-600/25 transition-all duration-700" />
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-blue-700/15 blur-3xl pointer-events-none" />
 
           {/* Top Line: Dynamic School Logo & Identity */}
           <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -394,7 +394,7 @@ export default function StudentDashboard() {
                 />
               </div>
               <div>
-                <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest font-khmer block leading-none">
+                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest font-khmer block leading-none">
                   {schoolName}
                 </span>
                 <span className="text-xs font-semibold text-slate-300 font-khmer mt-0.5 block">
@@ -404,21 +404,21 @@ export default function StudentDashboard() {
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold font-khmer shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold font-khmer shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
                 <span>ទិន្នន័យបានផ្ទៀងផ្ទាត់</span>
               </div>
             </div>
           </div>
 
-          {/* Main Hero Row: Student Avatar, Gamified Level, and Fast Actions */}
+          {/* Main Hero Row: Student Avatar, Level, and Actions */}
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="flex items-center gap-4 sm:gap-5">
-              <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-cyan-400 via-pink-500 to-indigo-600 p-[2px] shadow-[0_0_25px_rgba(6,182,212,0.4)] shrink-0">
-                <div className="w-full h-full rounded-[22px] bg-[#070b14] flex items-center justify-center font-black text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-tr from-cyan-300 to-indigo-200 font-khmer">
+              <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-3xl bg-blue-600 p-[2px] shadow-[0_0_25px_rgba(37,99,235,0.4)] shrink-0">
+                <div className="w-full h-full rounded-[22px] bg-[#070b14] flex items-center justify-center font-black text-2xl sm:text-3xl text-white font-khmer">
                   {(profile.fullNameKh || studentSession.studentName || "ស").charAt(0)}
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-r from-amber-400 to-rose-500 flex items-center justify-center text-[10px] text-white font-bold shadow-md">
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[10px] text-white font-bold shadow-md">
                   <Star className="w-3.5 h-3.5 fill-white" />
                 </div>
               </div>
@@ -428,7 +428,7 @@ export default function StudentDashboard() {
                   <h1 className="text-2xl sm:text-3xl font-black text-white font-khmer tracking-tight drop-shadow-sm">
                     {profile.fullNameKh || studentSession.studentName}
                   </h1>
-                  <span className="px-2.5 py-1 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold shadow-inner">
+                  <span className="px-2.5 py-1 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-300 text-xs font-mono font-bold shadow-inner">
                     {studentSession.studentId}
                   </span>
                 </div>
@@ -442,7 +442,7 @@ export default function StudentDashboard() {
                     {profile.skill || "វិទ្យាសាស្ត្រកុំព្យូទ័រ"}
                   </span>
                   <span>•</span>
-                  <span className="text-cyan-300">
+                  <span className="text-blue-300">
                     {schoolInfo?.semester || profile.semester || "ឆមាសទី ១"}
                   </span>
                 </div>
@@ -461,7 +461,7 @@ export default function StudentDashboard() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => setShowShareModal(true)}
-                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 hover:from-amber-400 hover:to-pink-400 text-white text-xs sm:text-sm font-black shadow-[0_4px_20px_rgba(244,63,94,0.35)] transition-all hover:scale-105 active:scale-95 cursor-pointer font-khmer"
+                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-black shadow-[0_4px_15px_rgba(37,99,235,0.3)] transition-all hover:scale-105 active:scale-95 cursor-pointer font-khmer"
                 title="បង្កើតកាតបញ្ឈរ Story សម្រាប់ចែករំលែកលើបណ្ដាញសង្គម"
               >
                 <Share2 className="w-4 h-4" />
@@ -470,31 +470,31 @@ export default function StudentDashboard() {
 
               <Link
                 to="/student/quizzes"
-                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs sm:text-sm font-bold backdrop-blur-md transition-all hover:scale-105 active:scale-95 shadow-sm font-khmer"
+                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs sm:text-sm font-bold backdrop-blur-md transition-all hover:scale-105 active:scale-95 shadow-sm font-khmer hover:border-blue-400/40"
               >
-                <ClipboardList className="w-4 h-4 text-cyan-400" />
+                <ClipboardList className="w-4 h-4 text-blue-400" />
                 <span>សំណួរ និងកិច្ចការ</span>
               </Link>
 
               <Link
                 to="/student/profile"
-                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs sm:text-sm font-bold backdrop-blur-md transition-all hover:scale-105 active:scale-95 shadow-sm font-khmer"
+                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs sm:text-sm font-bold backdrop-blur-md transition-all hover:scale-105 active:scale-95 shadow-sm font-khmer hover:border-blue-400/40"
               >
-                <Award className="w-4 h-4 text-cyan-400" />
+                <Award className="w-4 h-4 text-blue-400" />
                 <span>ប័ណ្ណសម្គាល់អត្តសញ្ញាណ (ID)</span>
               </Link>
 
               <Link
                 to="/student/library"
-                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs sm:text-sm font-bold shadow-[0_4px_15px_rgba(6,182,212,0.3)] transition-all hover:scale-105 active:scale-95 font-khmer"
+                className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs sm:text-sm font-bold backdrop-blur-md transition-all hover:scale-105 active:scale-95 shadow-sm font-khmer hover:border-blue-400/40"
               >
-                <BookOpen className="w-4 h-4" />
+                <BookOpen className="w-4 h-4 text-blue-400" />
                 <span>បណ្ណាល័យឌីជីថល</span>
               </Link>
 
               <Link
                 to="/student/print"
-                className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 hover:from-cyan-300 hover:to-indigo-500 text-white text-xs sm:text-sm font-black shadow-[0_4px_20px_rgba(6,182,212,0.4)] transition-all hover:scale-105 active:scale-95 font-khmer"
+                className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-black shadow-[0_4px_15px_rgba(37,99,235,0.3)] transition-all hover:scale-105 active:scale-95 font-khmer"
               >
                 <Printer className="w-4 h-4" />
                 <span>បោះពុម្ពលទ្ធផល (A4)</span>
@@ -502,23 +502,23 @@ export default function StudentDashboard() {
             </div>
           </div>
 
-          {/* Gamified LevelUp XP Progress Bar */}
+          {/* Unified Royal Blue Progress Bar */}
           <div className="relative z-10 p-4 rounded-2xl bg-white/[0.04] border border-white/10 space-y-2.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
               <div className="flex items-center gap-2 font-khmer font-bold">
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className="w-4 h-4 text-blue-400" />
                 <span className="text-slate-200">កម្រិតវឌ្ឍនភាពពិន្ទុ (LevelUp XP)៖</span>
-                <span className="text-cyan-300 font-mono text-sm">{totalScore} / 100</span>
+                <span className="text-blue-300 font-mono text-sm">{totalScore} / 100</span>
               </div>
               <span className="text-[11px] text-slate-400 font-khmer italic">
                 {levelInfo.motto}
               </span>
             </div>
 
-            {/* Futuristic XP Bar */}
+            {/* Clean Progress Bar */}
             <div className="w-full h-3.5 rounded-full bg-slate-900/80 p-0.5 border border-white/10 overflow-hidden relative">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-pink-500 to-amber-400 shadow-[0_0_15px_rgba(244,63,94,0.7)] transition-all duration-1000 ease-out relative"
+                className="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.6)] transition-all duration-1000 ease-out relative"
                 style={{ width: `${Math.min(totalScore, 100)}%` }}
               >
                 <div className="absolute inset-0 bg-white/20 animate-pulse" />
@@ -572,14 +572,14 @@ export default function StudentDashboard() {
         </div>
       </div>
 
-      {/* 3. Four Glowing Holographic Metric Pillar Cards */}
+      {/* 3. Four Metric Pillar Cards - Unified Royal Blue System */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         {/* Total Score */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-cyan-500/40 via-cyan-500/10 to-transparent hover:from-cyan-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">ពិន្ទុសរុប (Total)</span>
-              <div className="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-500 flex items-center justify-center shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <Award className="w-4 h-4" />
               </div>
             </div>
@@ -590,62 +590,62 @@ export default function StudentDashboard() {
               <span className="text-xs text-slate-400 font-mono font-bold">/ 100</span>
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>បូកបញ្ចូលគ្រប់ខ្លឹមសារវាយតម្លៃ</span>
             </p>
           </div>
         </div>
 
         {/* Average Score */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-indigo-500/40 via-indigo-500/10 to-transparent hover:from-indigo-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">ពិន្ទុមធ្យមភាគ</span>
-              <div className="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center shadow-[0_0_10px_rgba(99,102,241,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <TrendingUp className="w-4 h-4" />
               </div>
             </div>
             <div className="flex items-baseline gap-1 pt-0.5">
-              <span className="text-3xl sm:text-4xl font-black text-indigo-600 dark:text-indigo-400 font-mono tracking-tight">
+              <span className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 font-mono tracking-tight">
                 {academicSummary?.averageScore ?? (totalScore !== null && totalScore !== undefined ? totalScore : "—")}
               </span>
-              <span className="text-sm text-indigo-500 font-bold font-mono">%</span>
+              <span className="text-sm text-blue-500 font-bold font-mono">%</span>
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>គិតជាភាគរយមធ្យមរួម</span>
             </p>
           </div>
         </div>
 
         {/* Overall Grade 8-Tier */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-amber-500/40 via-amber-500/10 to-transparent hover:from-amber-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">និទ្ទេស (៨ ថ្នាក់)</span>
-              <div className="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <BookOpen className="w-4 h-4" />
               </div>
             </div>
             <div className="flex items-center gap-2 pt-0.5">
-              <span className="text-3xl sm:text-4xl font-black text-amber-500 font-mono">
+              <span className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 font-mono">
                 {overallGrade}
               </span>
               <StatusBadge status={overallGrade} />
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>កម្រិតសមត្ថភាព</span>
             </p>
           </div>
         </div>
 
         {/* Passing / Exam Status */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-emerald-500/40 via-emerald-500/10 to-transparent hover:from-emerald-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">ស្ថានភាពសិក្សា</span>
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <CheckCircle2 className="w-4 h-4" />
               </div>
             </div>
@@ -653,7 +653,7 @@ export default function StudentDashboard() {
               <StatusBadge status={academicSummary?.status || profile?.status || (totalScore >= 50 ? "ជាប់" : "ធ្លាក់")} />
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>{lastUpdated ? `Sync: ${new Date(lastUpdated).toLocaleDateString()}` : "ទិន្នន័យជាក់ស្ដែង"}</span>
             </p>
           </div>
@@ -982,15 +982,15 @@ export default function StudentDashboard() {
 
           {/* Search, Filter Tabs & View Mode Toggles */}
           <div className="px-5 sm:px-6 py-3 border-b border-slate-100 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/20 flex flex-col md:flex-row md:items-center justify-between gap-3">
-            {/* Quick Filter Pills */}
+            {/* Quick Filter Pills - Unified Royal Blue Styling */}
             <div className="flex flex-wrap items-center gap-1.5 text-xs font-khmer">
               <button
                 type="button"
                 onClick={() => setQuizFilter("all")}
                 className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer min-h-[36px] ${
                   quizFilter === "all"
-                    ? "bg-cyan-500 text-slate-950 shadow-sm"
-                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
                 }`}
               >
                 ទាំងអស់ ({totalQuizCount})
@@ -1000,8 +1000,8 @@ export default function StudentDashboard() {
                 onClick={() => setQuizFilter("pass")}
                 className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer min-h-[36px] ${
                   quizFilter === "pass"
-                    ? "bg-amber-500 text-slate-950 shadow-sm"
-                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
                 }`}
               >
                 ជាប់ (≥៥០%)
@@ -1011,8 +1011,8 @@ export default function StudentDashboard() {
                 onClick={() => setQuizFilter("high")}
                 className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer min-h-[36px] ${
                   quizFilter === "high"
-                    ? "bg-emerald-500 text-white shadow-sm"
-                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
                 }`}
               >
                 ឆ្នើម A (≥៨៥%)
@@ -1022,8 +1022,8 @@ export default function StudentDashboard() {
                 onClick={() => setQuizFilter("pending")}
                 className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer min-h-[36px] ${
                   quizFilter === "pending"
-                    ? "bg-rose-500 text-white shadow-sm"
-                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
                 }`}
               >
                 មិនទាន់មានពិន្ទុ ({totalQuizCount - completedCount})

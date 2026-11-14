@@ -63,19 +63,19 @@ export default function StudentProfilePage() {
         </div>
       </div>
 
-      {/* Futuristic Holographic ID Card */}
-      <div className="relative p-[1.5px] rounded-[32px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-600 shadow-[0_20px_60px_rgba(6,182,212,0.25)] group">
+      {/* Academic Royal Blue ID Card */}
+      <div className="relative p-[1.5px] rounded-[32px] bg-gradient-to-tr from-blue-600 via-blue-500 to-indigo-600 shadow-[0_20px_60px_rgba(37,99,235,0.25)] group">
         <div className="relative rounded-[30.5px] bg-white/95 dark:bg-[#0c1427]/95 backdrop-blur-2xl p-6 sm:p-9 space-y-8 overflow-hidden">
           {/* Background Ambient Mesh */}
           <div className="cyber-grid absolute inset-0 opacity-20 pointer-events-none" />
-          <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none group-hover:bg-cyan-500/25 transition-all" />
-          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
+          <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-blue-500/15 blur-3xl pointer-events-none group-hover:bg-blue-500/25 transition-all" />
+          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-blue-700/15 blur-3xl pointer-events-none" />
 
           {/* Card Top National & School Seal */}
           <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/80 dark:border-slate-800/80">
             <div className="flex items-center gap-4">
-              <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-400 to-blue-600 p-0.5 shadow-[0_0_20px_rgba(6,182,212,0.4)] shrink-0">
-                <div className="w-full h-full rounded-[14px] bg-[#070b14] flex items-center justify-center font-bold text-2xl text-cyan-400 font-khmer overflow-hidden">
+              <div className="relative w-16 h-16 rounded-2xl bg-blue-600 p-0.5 shadow-[0_0_20px_rgba(37,99,235,0.4)] shrink-0">
+                <div className="w-full h-full rounded-[14px] bg-[#070b14] flex items-center justify-center font-bold text-2xl text-blue-400 font-khmer overflow-hidden">
                   <img
                     src={schoolLogo}
                     alt="School Logo"
@@ -85,13 +85,13 @@ export default function StudentProfilePage() {
                     }}
                   />
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shadow-sm">
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] shadow-sm">
                   <Check className="w-3 h-3 stroke-[3]" />
                 </div>
               </div>
 
               <div>
-                <div className="text-[10px] font-bold text-cyan-500 uppercase tracking-widest font-khmer">
+                <div className="text-[10px] font-bold text-blue-500 uppercase tracking-widest font-khmer">
                   ព្រះរាជាណាចក្រកម្ពុជា • {schoolName}
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-khmer mt-0.5">
@@ -105,14 +105,14 @@ export default function StudentProfilePage() {
 
             {/* Smart Holographic Chip & QR simulation */}
             <div className="flex items-center gap-3 self-end sm:self-center">
-              <div className="w-11 h-9 rounded-lg bg-gradient-to-tr from-amber-400 via-yellow-300 to-amber-500 shadow-sm border border-amber-300 flex items-center justify-center p-1 relative overflow-hidden">
-                <div className="w-full h-full border border-amber-600/40 rounded flex flex-col justify-between p-0.5">
-                  <div className="w-full h-0.5 bg-amber-600/40" />
-                  <div className="w-full h-0.5 bg-amber-600/40" />
+              <div className="w-11 h-9 rounded-lg bg-gradient-to-tr from-blue-700 via-blue-600 to-indigo-700 shadow-sm border border-blue-400/30 flex items-center justify-center p-1 relative overflow-hidden">
+                <div className="w-full h-full border border-blue-300/40 rounded flex flex-col justify-between p-0.5">
+                  <div className="w-full h-0.5 bg-blue-300/40" />
+                  <div className="w-full h-0.5 bg-blue-300/40" />
                 </div>
               </div>
 
-              <div className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-slate-700 dark:text-cyan-400">
+              <div className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-slate-700 dark:text-blue-400">
                 <QrCode className="w-7 h-7" />
               </div>
             </div>
@@ -125,10 +125,10 @@ export default function StudentProfilePage() {
               return (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200/70 dark:border-white/[0.08] hover:border-cyan-500/40 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all duration-300 group/tile shadow-2xs"
+                  className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200/70 dark:border-white/[0.08] hover:border-blue-500/40 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all duration-300 group/tile shadow-2xs"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 text-cyan-600 dark:text-cyan-400 shrink-0 shadow-2xs group-hover/tile:scale-105 group-hover/tile:text-cyan-500 transition-transform">
+                    <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 text-blue-600 dark:text-blue-400 shrink-0 shadow-2xs group-hover/tile:scale-105 group-hover/tile:text-blue-500 transition-transform">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
@@ -144,7 +144,7 @@ export default function StudentProfilePage() {
                   {item.copyable && (
                     <button
                       onClick={handleCopyId}
-                      className="p-2 rounded-xl hover:bg-slate-200/70 dark:hover:bg-slate-800 text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer"
+                      className="p-2 rounded-xl hover:bg-slate-200/70 dark:hover:bg-slate-800 text-slate-400 hover:text-blue-400 transition-colors cursor-pointer"
                       title="ចម្លងអត្តលេខ"
                     >
                       {copied ? (

@@ -3,10 +3,10 @@ import { Sparkles, TrendingUp } from 'lucide-react';
 
 /**
  * MyPintou (Myពិន្ទុ) - Official Brand Logo Component
- * Incorporates Gen Z, Gamified (LevelUp), and Cyber-Academic aesthetics:
- * - App Icon: Stylized 'P' with Upward Growth Arrow
- * - Text: 'My' in Tech Cyan, 'ពិន្ទុ' in vibrant Sunset Gradient
- * - Accent: A+ Star Badge & LevelUp micro-badge
+ * Unified Royal Blue (#2563EB) Signature Academic Brand Identity:
+ * - App Icon: School / App Icon with subtle Royal Blue glow
+ * - Text: 'My' in Royal Blue, 'ពិន្ទុ' in Slate/White with Royal Blue accent
+ * - Accent: Clean Royal Blue A+ Badge
  */
 import { useSchool } from '../context/SchoolContext.jsx';
 
@@ -38,11 +38,11 @@ export default function BrandLogo({
           src={logoSrc} 
           alt="School Logo" 
           onError={(e) => { e.currentTarget.src = "/assets/images/app_icon.svg"; }}
-          className={`${currentSize.icon} object-contain rounded-2xl shadow-lg shadow-cyan-500/20 hover:scale-105 transition-transform duration-300`} 
+          className={`${currentSize.icon} object-contain rounded-2xl shadow-lg shadow-blue-500/20 hover:scale-105 transition-transform duration-300`} 
         />
         <span className="absolute -top-1 -right-1 flex h-3 w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-gradient-to-r from-amber-400 to-rose-500"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-600"></span>
         </span>
       </div>
     );
@@ -52,38 +52,38 @@ export default function BrandLogo({
     <div className={`inline-flex items-center gap-3 select-none group ${className}`}>
       {showIcon && (
         <div className="relative flex-shrink-0">
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-pink-500 to-amber-400 rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition duration-500"></div>
+          <div className="absolute -inset-1 bg-blue-600/30 rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition duration-500"></div>
           <img 
             src={logoSrc} 
             alt="School Logo" 
             onError={(e) => { e.currentTarget.src = "/assets/images/app_icon.svg"; }}
-            className={`relative ${currentSize.icon} object-contain rounded-xl shadow-md transform group-hover:rotate-3 transition duration-300`} 
+            className={`relative ${currentSize.icon} object-contain rounded-xl shadow-md transform group-hover:scale-105 transition duration-300`} 
           />
         </div>
       )}
 
       <div className="flex flex-col">
         <div className="flex items-center gap-1.5 leading-none">
-          <span className={`font-black font-khmer tracking-tight ${currentSize.text} text-cyan-400 dark:text-cyan-300 drop-shadow-[0_2px_10px_rgba(6,182,212,0.4)]`}>
+          <span className={`font-black font-khmer tracking-tight ${currentSize.text} text-blue-600 dark:text-blue-400 drop-shadow-[0_2px_8px_rgba(37,99,235,0.3)]`}>
             My
           </span>
-          <span className={`font-black font-khmer tracking-tight ${currentSize.text} bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(244,63,94,0.35)]`}>
+          <span className={`font-black font-khmer tracking-tight ${currentSize.text} text-slate-900 dark:text-white`}>
             ពិន្ទុ
           </span>
-          <span className={`font-bold font-khmer uppercase tracking-wider rounded-full bg-gradient-to-r from-amber-400/20 via-pink-500/20 to-cyan-500/20 border border-amber-400/40 text-amber-500 dark:text-amber-300 ${currentSize.badge} flex items-center gap-0.5 ml-0.5 shadow-sm`}>
-            <Sparkles className="w-2.5 h-2.5 text-amber-400 animate-pulse" />
+          <span className={`font-bold font-khmer uppercase tracking-wider rounded-full bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 ${currentSize.badge} flex items-center gap-0.5 ml-0.5 shadow-xs`}>
+            <Sparkles className="w-2.5 h-2.5 text-blue-500 animate-pulse" />
             <span>A+</span>
           </span>
         </div>
 
         {showSubtitle && (
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className={`font-medium font-khmer text-slate-500 dark:text-slate-400 tracking-wide ${currentSize.sub}`}>
+            <span className={`font-semibold font-khmer text-slate-500 dark:text-slate-400 tracking-wide ${currentSize.sub}`}>
               MyPintou
             </span>
-            <span className="w-1 h-1 rounded-full bg-cyan-400"></span>
-            <span className={`font-semibold font-khmer text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 ${currentSize.sub} flex items-center gap-0.5`}>
-              <TrendingUp className="w-2.5 h-2.5 text-cyan-400 inline" /> រីកចម្រើន LevelUp
+            <span className="w-1 h-1 rounded-full bg-blue-500"></span>
+            <span className={`font-semibold font-khmer text-blue-600 dark:text-blue-400 ${currentSize.sub} flex items-center gap-0.5`}>
+              <TrendingUp className="w-2.5 h-2.5 text-blue-500 inline" /> ប្រព័ន្ធគ្រប់គ្រងពិន្ទុ
             </span>
           </div>
         )}

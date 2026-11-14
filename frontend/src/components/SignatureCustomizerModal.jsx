@@ -140,9 +140,9 @@ export default function SignatureCustomizerModal({ isOpen, onClose, onSaveSucces
       <div className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden">
         
         {/* Modal Header */}
-        <div className="p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-transparent">
+        <div className="p-6 border-b border-slate-100 dark:border-white/10 flex items-center justify-between bg-gradient-to-r from-blue-500/10 via-blue-500/5 to-transparent">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
+            <div className="w-10 h-10 rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-xs">
               <PenTool className="w-5 h-5" />
             </div>
             <div>
@@ -636,7 +636,7 @@ export default function SignatureCustomizerModal({ isOpen, onClose, onSaveSucces
             type="button"
             onClick={handleSave}
             disabled={saving}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/25 transition-all cursor-pointer hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-500/25 transition-all cursor-pointer hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             {saving ? (
               <>

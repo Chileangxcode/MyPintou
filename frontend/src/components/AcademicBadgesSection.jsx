@@ -149,7 +149,7 @@ export default function AcademicBadgesSection({ studentSession }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-100 dark:border-white/5">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-500 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.3)]">
+            <div className="w-8 h-8 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_12px_rgba(37,99,235,0.3)]">
               <Trophy className="w-4 h-4" />
             </div>
             <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
@@ -165,13 +165,13 @@ export default function AcademicBadgesSection({ studentSession }) {
         <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-900/60 p-2.5 px-4 rounded-2xl border border-slate-200 dark:border-white/10 shrink-0">
           <div className="text-right">
             <div className="text-xs font-bold text-slate-900 dark:text-white">
-              បានដោះសោ៖ <strong className="text-cyan-500 font-mono text-sm">{unlockedCount}</strong> / {totalBadges}
+              បានដោះសោ៖ <strong className="text-blue-600 dark:text-blue-400 font-mono text-sm">{unlockedCount}</strong> / {totalBadges}
             </div>
             <div className="text-[10px] text-slate-400 font-mono">
               {unlockedPercent}% សម្រេចបាន
             </div>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-md">
+          <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-md shadow-blue-500/30">
             {unlockedPercent}%
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function AcademicBadgesSection({ studentSession }) {
               onClick={() => setSelectedBadge(badge)}
               className={`relative p-4 rounded-2xl border transition-all duration-300 cursor-pointer group ${
                 badge.unlocked
-                  ? "bg-white/80 dark:bg-slate-900/60 border-slate-200/90 dark:border-white/10 hover:border-cyan-400/60 hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)] hover:-translate-y-1"
+                  ? "bg-white/80 dark:bg-slate-900/60 border-slate-200/90 dark:border-white/10 hover:border-blue-500/60 hover:shadow-[0_8px_30px_rgba(37,99,235,0.15)] hover:-translate-y-1"
                   : "bg-slate-50/60 dark:bg-slate-900/20 border-slate-200/50 dark:border-white/5 opacity-75 hover:opacity-100"
               }`}
             >
@@ -207,7 +207,7 @@ export default function AcademicBadgesSection({ studentSession }) {
                   </div>
 
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors">
                       {badge.titleKh}
                     </h4>
                     <p className="text-[10px] text-slate-400 font-mono">

@@ -42,9 +42,9 @@ export default function StudentAnnouncementBanner() {
         };
       default:
         return {
-          bg: "from-cyan-500/20 via-blue-500/10 to-teal-500/10",
-          border: "border-cyan-500/40",
-          badge: "bg-cyan-500 text-slate-900 shadow-cyan-500/30",
+          bg: "from-blue-600/20 via-blue-500/10 to-indigo-500/10",
+          border: "border-blue-500/40",
+          badge: "bg-blue-600 text-white shadow-blue-500/30",
           icon: Megaphone,
           label: "ដំណឹងទូទៅ"
         };

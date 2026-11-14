@@ -204,23 +204,23 @@ export default function StudentLibraryPage() {
         </div>
       )}
 
-      {/* Student E-Library Hero Header (High Contrast, Crisp & Easy to Read) */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-700 to-slate-900 text-white shadow-2xl border border-indigo-400/30 p-6 md:p-8">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 bg-cyan-400/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 -mb-20 w-72 h-72 bg-indigo-400/20 rounded-full blur-3xl pointer-events-none" />
+      {/* Student E-Library Hero Header (Unified Royal Blue System) */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-blue-600 to-slate-900 text-white shadow-2xl border border-blue-500/30 p-6 md:p-8">
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-72 h-72 bg-blue-400/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 -mb-20 w-72 h-72 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="flex flex-wrap items-center gap-2">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/20 text-white text-xs font-semibold tracking-wide backdrop-blur-md shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
+                <Sparkles className="w-3.5 h-3.5 text-blue-300" />
                 <span>បណ្ណាល័យឌីជីថលនិស្សិត (Student E-Library & Courseware)</span>
               </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/25 border border-emerald-400/40 text-emerald-200 text-xs font-bold tracking-wide backdrop-blur-md shadow-sm">
-                <span className={`w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] ${isSyncing ? "animate-ping" : ""}`} />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/25 border border-blue-400/40 text-blue-200 text-xs font-bold tracking-wide backdrop-blur-md shadow-sm">
+                <span className={`w-2.5 h-2.5 rounded-full bg-blue-400 shadow-[0_0_8px_#3b82f6] ${isSyncing ? "animate-ping" : ""}`} />
                 <span>Cloud Repository Live</span>
                 {lastSyncTime && (
-                  <span className="text-emerald-300/80 text-[11px] ml-1">
+                  <span className="text-blue-200/80 text-[11px] ml-1">
                     • {new Date(lastSyncTime).toLocaleTimeString("km-KH", { hour: "2-digit", minute: "2-digit" })}
                   </span>
                 )}
@@ -228,7 +228,7 @@ export default function StudentLibraryPage() {
             </div>
 
             <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-3 drop-shadow-sm">
-              <div className="w-11 h-11 rounded-2xl bg-white/20 border border-white/25 flex items-center justify-center text-cyan-200 shadow-inner">
+              <div className="w-11 h-11 rounded-2xl bg-white/20 border border-white/25 flex items-center justify-center text-white shadow-inner">
                 <BookOpen className="w-6 h-6" />
               </div>
               <span>បណ្ណាល័យ និងធនធានសិក្សាឌីជីថល</span>
@@ -247,7 +247,7 @@ export default function StudentLibraryPage() {
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-bold transition-all cursor-pointer active:scale-95 disabled:opacity-50 backdrop-blur-md shadow-sm"
               title="ទាញយកទិន្នន័យចុងក្រោយពី Cloud Database"
             >
-              <RefreshCw className={`w-3.5 h-3.5 text-cyan-300 ${isSyncing ? "animate-spin" : ""}`} />
+              <RefreshCw className={`w-3.5 h-3.5 text-blue-200 ${isSyncing ? "animate-spin" : ""}`} />
               <span>{isSyncing ? "កំពុង Sync..." : "Sync ពី Cloud Server"}</span>
             </button>
 

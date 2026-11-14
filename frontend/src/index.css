@@ -2,11 +2,41 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-brand: #2563eb;
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-brand-950: #172554;
+
+  /* Unified Royal Blue Theme: Map cyan tokens to Royal Blue */
+  --color-cyan-50: #eff6ff;
+  --color-cyan-100: #dbeafe;
+  --color-cyan-200: #bfdbfe;
+  --color-cyan-300: #93c5fd;
+  --color-cyan-400: #60a5fa;
+  --color-cyan-500: #3b82f6;
+  --color-cyan-600: #2563eb;
+  --color-cyan-700: #1d4ed8;
+  --color-cyan-800: #1e40af;
+  --color-cyan-900: #1e3a8a;
+  --color-cyan-950: #172554;
+}
+
 @layer base {
   :root {
     --color-primary: #2563eb;
     --color-primary-dark: #1d4ed8;
-    --color-accent: #06b6d4;
+    --color-accent: #2563eb;
     --color-bg-dark: #070B14;
     --color-surface-dark: #0F172A;
   }

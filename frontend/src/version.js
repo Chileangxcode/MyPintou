@@ -3,14 +3,14 @@
  * Auto-generated and synchronized at build time.
  */
 
-export const APP_VERSION = "2.2.1";
+export const APP_VERSION = "2.2.2";
 export const BUILD_TIMESTAMP = new Date().toISOString();
 export const RELEASE_CHANNEL = "production";
 export const RELEASE_NOTES = [
-  "Mobile Navigation Bar Fix: Safe-area inset spacing for iPhone home indicator",
-  "Footer Padding Fix: Prevent footer text bleed behind fixed bottom navigation",
-  "Clean 5-Tab mobile bottom bar with comfortable touch targets",
-  "Student Dashboard: Quizzes & Tasks Matrix table displayed above Badges"
+  "Unified Royal Blue (#2563EB) single-color academic brand identity",
+  "Eliminated rainbow multi-color gradients across badges, buttons, and banners",
+  "Tailwind CSS v4 Royal Blue theme aliasing for crisp visual harmony",
+  "Mobile Navigation & Safe-Area Ergonomics with zero footer clipping"
 ];
 
 /**

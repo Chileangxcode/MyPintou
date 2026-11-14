@@ -117,29 +117,29 @@ export default function StudentLayout() {
             <div className="flex flex-col">
               <BrandLogo size="sm" showSubtitle={false} />
               <div className="flex items-center mt-2">
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide flex items-center bg-cyan-500/15 text-cyan-400 border border-cyan-500/30">
-                  <i className="fas fa-user-graduate text-[9px] mr-1 text-cyan-400" />
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide flex items-center bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                  <i className="fas fa-user-graduate text-[9px] mr-1 text-blue-400" />
                   <span>និស្សិត</span>
                 </span>
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-60" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-60" />
           </div>
 
           {/* Student Identity Card in Sidebar (Holographic Card) */}
-          <div className="p-4 m-3.5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-800/60 border border-cyan-500/20 shadow-[0_4px_20px_rgba(0,0,0,0.3)] space-y-2 relative overflow-hidden group">
-            <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-cyan-500/10 blur-xl pointer-events-none group-hover:bg-cyan-500/20 transition-all" />
+          <div className="p-4 m-3.5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-800/60 border border-blue-500/20 shadow-[0_4px_20px_rgba(0,0,0,0.3)] space-y-2 relative overflow-hidden group">
+            <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-blue-500/10 blur-xl pointer-events-none group-hover:bg-blue-500/20 transition-all" />
             <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium">
-              <span className="text-cyan-400 font-bold tracking-wider font-khmer">ប័ណ្ណសម្គាល់និស្សិត</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+              <span className="text-blue-400 font-bold tracking-wider font-khmer">ប័ណ្ណសម្គាល់និស្សិត</span>
+              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_rgba(37,99,235,0.8)]" />
             </div>
             <div className="text-sm font-bold text-white truncate font-khmer">
               {studentSession.studentName}
             </div>
-            <div className="text-xs text-cyan-400 font-mono font-semibold flex items-center gap-1.5">
+            <div className="text-xs text-blue-400 font-mono font-semibold flex items-center gap-1.5">
               <span>អត្តលេខ៖</span>
-              <span className="bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">{studentSession.studentId}</span>
+              <span className="bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">{studentSession.studentId}</span>
             </div>
             <div className="text-[11px] text-slate-400 pt-2 border-t border-slate-800/80 flex items-center justify-between">
               <span>បន្ទប់៖ {studentSession.profile?.room || "ទូទៅ"}</span>
@@ -150,7 +150,7 @@ export default function StudentLayout() {
           {/* Navigation Items */}
           <nav className="flex-1 px-3 py-2 space-y-1.5">
             <div className="px-3 pb-1 pt-1 flex items-center space-x-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_6px_rgba(37,99,235,0.8)]" />
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-khmer">
                 ច្រកកិច្ចការសិក្សា
               </p>
@@ -163,7 +163,7 @@ export default function StudentLayout() {
                 className={({ isActive }) =>
                   `w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-left text-[13px] font-khmer transition-all duration-300 group ${
                     isActive
-                      ? "bg-gradient-to-r from-cyan-500/20 via-blue-600/15 to-transparent text-white font-bold border-l-4 border-cyan-400 shadow-[inset_2px_0_12px_rgba(6,182,212,0.25)]"
+                      ? "bg-gradient-to-r from-blue-600/25 via-blue-500/15 to-transparent text-white font-bold border-l-4 border-blue-500 shadow-[inset_2px_0_12px_rgba(37,99,235,0.25)]"
                       : "hover:bg-slate-800/60 text-slate-400 hover:text-white font-medium border-l-4 border-transparent hover:translate-x-1"
                   }`
                 }
@@ -173,8 +173,8 @@ export default function StudentLayout() {
                     <div
                       className={`w-7 h-7 rounded-lg flex items-center justify-center text-sm transition-all ${
                         isActive
-                          ? "bg-cyan-500/20 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.6)] scale-110"
-                          : "bg-transparent text-slate-400 group-hover:text-cyan-400"
+                          ? "bg-blue-600/20 text-blue-400 drop-shadow-[0_0_8px_rgba(37,99,235,0.6)] scale-110"
+                          : "bg-transparent text-slate-400 group-hover:text-blue-400"
                       }`}
                     >
                       <i className={item.iconClass} />
@@ -190,10 +190,10 @@ export default function StudentLayout() {
                 type="button"
                 onClick={() => refreshStudentScores()}
                 disabled={loading}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 hover:border-cyan-500/40 transition-all cursor-pointer disabled:opacity-50 group font-khmer"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 hover:border-blue-500/40 transition-all cursor-pointer disabled:opacity-50 group font-khmer"
               >
                 <span className="flex items-center gap-2">
-                  <i className={`fas fa-rotate ${loading ? "fa-spin text-cyan-400" : "text-cyan-400 group-hover:rotate-180 transition-transform duration-500"}`} />
+                  <i className={`fas fa-rotate ${loading ? "fa-spin text-blue-400" : "text-blue-400 group-hover:rotate-180 transition-transform duration-500"}`} />
                   <span>ធ្វើបច្ចុប្បន្នភាពទិន្នន័យ</span>
                 </span>
                 <span className="text-[10px] text-slate-500 font-mono">Sync</span>
@@ -205,20 +205,20 @@ export default function StudentLayout() {
           <div className="p-3.5 border-t border-slate-800/80 mt-auto bg-slate-900/50 backdrop-blur-md space-y-2 shrink-0">
             <div className="px-1 flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span className="flex items-center gap-1.5 font-bold text-slate-300">
-                <i className="fas fa-code-branch text-[9px] text-cyan-400" />
+                <i className="fas fa-code-branch text-[9px] text-blue-400" />
                 <span>v{APP_VERSION}</span>
               </span>
               <button
                 type="button"
                 onClick={handleCheckUpdate}
                 disabled={updateChecking}
-                className="text-[10px] text-cyan-400 hover:text-cyan-300 hover:underline cursor-pointer disabled:opacity-50"
+                className="text-[10px] text-blue-400 hover:text-blue-300 hover:underline cursor-pointer disabled:opacity-50"
               >
                 {updateChecking ? "កំពុងពិនិត្យ..." : "ពិនិត្យកំណែថ្មី"}
               </button>
             </div>
             {updateStatus && (
-              <div className="text-[10px] text-cyan-400 font-khmer text-center px-1 animate-fade-in">
+              <div className="text-[10px] text-blue-400 font-khmer text-center px-1 animate-fade-in">
                 {updateStatus}
               </div>
             )}
@@ -267,7 +267,7 @@ export default function StudentLayout() {
               <ThemeToggle />
 
               <div className="flex items-center space-x-2.5 pl-2 sm:pl-3 border-l border-slate-200 dark:border-slate-800">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-[0_0_12px_rgba(6,182,212,0.4)] ring-2 ring-cyan-500/20 shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-[0_0_12px_rgba(37,99,235,0.4)] ring-2 ring-blue-500/20 shrink-0">
                   <i className="fas fa-user-graduate text-xs" />
                 </div>
 
@@ -275,7 +275,7 @@ export default function StudentLayout() {
                   <p className="text-xs font-bold text-slate-800 dark:text-white leading-tight max-w-[130px] truncate">
                     {studentSession.studentName}
                   </p>
-                  <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 mt-0.5">
+                  <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 mt-0.5">
                     {studentSession.studentId}
                   </span>
                 </div>
@@ -284,10 +284,10 @@ export default function StudentLayout() {
                 <button
                   type="button"
                   onClick={triggerPWAInstall}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[44px]"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-600 dark:text-blue-400 text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[44px]"
                   title="ដំឡើងលើទូរស័ព្ទ (Install Mobile App)"
                 >
-                  <i className="fas fa-download text-xs text-cyan-500" />
+                  <i className="fas fa-download text-xs text-blue-500" />
                   <span className="font-khmer hidden sm:inline text-[11px]">ដំឡើងលើទូរស័ព្ទ</span>
                 </button>
 
@@ -355,7 +355,7 @@ export default function StudentLayout() {
                 <button
                   type="button"
                   onClick={handleCheckUpdate}
-                  className="text-cyan-400 underline font-khmer text-[10px]"
+                  className="text-blue-400 underline font-khmer text-[10px]"
                 >
                   ពិនិត្យកំណែថ្មី
                 </button>
@@ -368,7 +368,7 @@ export default function StudentLayout() {
                   setSidebarOpen(false);
                   triggerPWAInstall();
                 }}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400 font-bold text-xs min-h-[44px] cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 font-bold text-xs min-h-[44px] cursor-pointer"
               >
                 <i className="fas fa-download text-xs" />
                 <span>ដំឡើងលើទូរស័ព្ទ</span>
@@ -401,7 +401,7 @@ export default function StudentLayout() {
               className={({ isActive }) =>
                 `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 transition-all ${
                   isActive
-                    ? "text-cyan-600 dark:text-cyan-400 font-extrabold scale-105"
+                    ? "text-blue-600 dark:text-blue-400 font-extrabold scale-105"
                     : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                 }`
               }
@@ -415,7 +415,7 @@ export default function StudentLayout() {
           <button
             type="button"
             onClick={() => setSidebarOpen(true)}
-            className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 text-slate-400 dark:text-slate-500 hover:text-cyan-500 cursor-pointer transition-all active:scale-95"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 text-slate-400 dark:text-slate-500 hover:text-blue-500 cursor-pointer transition-all active:scale-95"
             title="ម៉ឺនុយបន្ថែម"
           >
             <i className="fas fa-bars text-base" />

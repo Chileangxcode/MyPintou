@@ -316,13 +316,13 @@ export default function UserManagementPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-semibold mb-2">
-            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold mb-2">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
             <span className="font-bold">ប្រព័ន្ធមូលទិន្នន័យគណនី (User Directory)</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
             <span>គ្រប់គ្រងគណនីចូលប្រព័ន្ធ (User Logins)</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-lg bg-indigo-500/10 text-indigo-500 font-mono font-bold">
+            <span className="text-xs px-2.5 py-0.5 rounded-lg bg-blue-500/10 text-blue-500 font-mono font-bold">
               CRUD Active
             </span>
           </h2>
@@ -336,7 +336,7 @@ export default function UserManagementPage() {
             type="button"
             onClick={handleSyncUsers}
             disabled={syncLoading}
-            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-indigo-600/15 hover:bg-indigo-600/25 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-xs font-bold transition-all cursor-pointer shadow-sm disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-blue-600/15 hover:bg-blue-600/25 border border-blue-500/30 text-blue-600 dark:text-blue-400 text-xs font-bold transition-all cursor-pointer shadow-sm disabled:opacity-50"
             title="ទាញបញ្ជីឈ្មោះសិស្សទាំងអស់មកបង្កើតជាគណនីចូលដោយស្វ័យប្រវត្តិ"
           >
             <RefreshCw className={`w-4 h-4 ${syncLoading ? "animate-spin" : ""}`} />
@@ -346,7 +346,7 @@ export default function UserManagementPage() {
           <button
             type="button"
             onClick={openAddModal}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-xs shadow-md shadow-rose-600/25 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/25 hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
             <span>បន្ថែមគណនីថ្មី</span>
@@ -392,12 +392,12 @@ export default function UserManagementPage() {
         </div>
 
         <div className="p-4 rounded-2xl bg-white/80 dark:bg-[#0c1427]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-rose-500/15 text-rose-500 flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-xl bg-blue-500/15 text-blue-500 flex items-center justify-center shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
             <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">អ្នកគ្រប់គ្រង (Admin)</div>
-            <div className="text-xl font-black text-rose-600 dark:text-rose-400 font-mono">{stats.adminCount}</div>
+            <div className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono">{stats.adminCount}</div>
           </div>
         </div>
 
@@ -412,38 +412,38 @@ export default function UserManagementPage() {
         </div>
 
         <div className="p-4 rounded-2xl bg-white/80 dark:bg-[#0c1427]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-xl bg-blue-500/15 text-blue-500 flex items-center justify-center shrink-0">
             <GraduationCap className="w-5 h-5" />
           </div>
           <div>
             <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">គណនីសិស្ស (Student)</div>
-            <div className="text-xl font-black text-emerald-600 dark:text-emerald-400 font-mono">{stats.studentCount}</div>
+            <div className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono">{stats.studentCount}</div>
           </div>
         </div>
 
         <div className="p-4 rounded-2xl bg-white/80 dark:bg-[#0c1427]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm flex items-center gap-3 col-span-2 sm:col-span-1">
-          <div className="w-11 h-11 rounded-xl bg-teal-500/15 text-teal-500 flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-xl bg-blue-500/15 text-blue-500 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
             <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">សកម្ម (Active)</div>
-            <div className="text-xl font-black text-teal-600 dark:text-teal-400 font-mono">{stats.activeCount}</div>
+            <div className="text-xl font-black text-blue-600 dark:text-blue-400 font-mono">{stats.activeCount}</div>
           </div>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="relative p-[1px] rounded-3xl bg-gradient-to-r from-rose-500/20 via-indigo-500/15 to-transparent">
+      <div className="relative p-[1px] rounded-3xl bg-gradient-to-r from-blue-500/20 via-blue-500/10 to-transparent">
         <div className="bg-white/85 dark:bg-[#0b1329]/85 backdrop-blur-xl rounded-[23px] border border-slate-200/80 dark:border-slate-800/80 p-5 shadow-sm space-y-3">
           <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-rose-500 absolute left-3.5 top-3" />
+              <Search className="w-4 h-4 text-blue-500 absolute left-3.5 top-3" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="ស្វែងរកតាម User ID, ឈ្មោះគណនី, ឈ្មោះពេញ ឬ Student ID..."
-                className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/60 text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all h-10"
+                className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/60 text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all h-10"
               />
             </div>
 
@@ -451,7 +451,7 @@ export default function UserManagementPage() {
               <select
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
-                className="px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900/80 focus:outline-none focus:ring-2 focus:ring-rose-500/50 h-10 cursor-pointer"
+                className="px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900/80 focus:outline-none focus:ring-2 focus:ring-blue-500/50 h-10 cursor-pointer"
               >
                 <option value="all">តួនាទីទាំងអស់</option>
                 <option value="admin">Admin (អ្នកគ្រប់គ្រង)</option>
@@ -462,7 +462,7 @@ export default function UserManagementPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900/80 focus:outline-none focus:ring-2 focus:ring-rose-500/50 h-10 cursor-pointer"
+                className="px-3.5 py-2 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900/80 focus:outline-none focus:ring-2 focus:ring-blue-500/50 h-10 cursor-pointer"
               >
                 <option value="all">ស្ថានភាពទាំងអស់</option>
                 <option value="active">Active (សកម្ម)</option>
@@ -471,7 +471,7 @@ export default function UserManagementPage() {
 
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-indigo-600 hover:from-rose-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-semibold transition-all h-10 cursor-pointer shadow-sm shadow-rose-600/20 active:scale-95 shrink-0"
+                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold transition-all h-10 cursor-pointer shadow-sm shadow-blue-600/20 active:scale-95 shrink-0"
               >
                 ស្វែងរក
               </button>
@@ -484,7 +484,7 @@ export default function UserManagementPage() {
       <div className="rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/90 dark:bg-[#0c1427]/90 backdrop-blur-xl overflow-hidden shadow-sm relative">
         {/* Subtle Sync Indicator at top edge - 0ms flicker */}
         {isSyncing && (
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-indigo-500 to-cyan-400 animate-pulse z-10" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 animate-pulse z-10" />
         )}
         {initialLoading && users.length === 0 ? (
           <div className="p-6">
@@ -492,7 +492,7 @@ export default function UserManagementPage() {
           </div>
         ) : users.length === 0 ? (
           <div className="p-12 text-center space-y-3">
-            <div className="w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-500 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center mx-auto">
               <Users className="w-7 h-7" />
             </div>
             <h4 className="text-base font-bold text-slate-800 dark:text-white">មិនមានទិន្នន័យគណនីឡើយ</h4>
@@ -502,7 +502,7 @@ export default function UserManagementPage() {
             <button
               onClick={handleSyncUsers}
               disabled={syncLoading}
-              className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-500 transition-all cursor-pointer shadow-md"
+              className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-500 transition-all cursor-pointer shadow-md"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Sync គណនីសិស្សឥឡូវនេះ</span>
@@ -860,7 +860,7 @@ export default function UserManagementPage() {
           <div className="w-full max-w-lg bg-white dark:bg-[#0c1427] border border-slate-200 dark:border-white/15 rounded-3xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-white/10">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-2xl bg-blue-500/15 text-blue-500 flex items-center justify-center">
                   <UserPlus className="w-5 h-5" />
                 </div>
                 <div>
@@ -895,7 +895,7 @@ export default function UserManagementPage() {
                       onClick={() => setFormData({ ...formData, role: r })}
                       className={`py-2 rounded-xl border text-center font-bold capitalize transition-all cursor-pointer ${
                         formData.role === r
-                          ? "bg-rose-600 text-white border-rose-600 shadow-sm"
+                          ? "bg-blue-600 text-white border-blue-600 shadow-sm"
                           : "bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
                       }`}
                     >
@@ -1022,7 +1022,7 @@ export default function UserManagementPage() {
                 <button
                   type="submit"
                   disabled={formLoading}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-md shadow-rose-600/30 disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-md shadow-blue-600/30 disabled:opacity-50"
                 >
                   {formLoading ? "កំពុងរក្សាទុក..." : "រក្សាទុកទិន្នន័យ"}
                 </button>

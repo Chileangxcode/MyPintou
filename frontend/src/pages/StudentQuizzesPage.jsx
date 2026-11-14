@@ -155,22 +155,22 @@ export default function StudentQuizzesPage() {
   }, [quizList]);
 
   const getBarColor = (pct) => {
-    if (pct >= 85) return "#10b981"; // emerald
-    if (pct >= 70) return "#06b6d4"; // cyan
-    if (pct >= 50) return "#f59e0b"; // amber
-    return "#f43f5e"; // rose
+    if (pct >= 85) return "#2563eb"; // Royal Blue Dark
+    if (pct >= 70) return "#3b82f6"; // Royal Blue Primary
+    if (pct >= 50) return "#60a5fa"; // Royal Blue Medium
+    return "#93c5fd"; // Royal Blue Soft
   };
 
   if (!studentSession) return null;
 
   return (
     <div className="space-y-6">
-      {/* 1. Futuristic Cyber Header Banner */}
-      <div className="relative p-[1.5px] rounded-[32px] bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-600 shadow-[0_15px_50px_rgba(6,182,212,0.2)]">
+      {/* 1. Academic Header Banner - Royal Blue System */}
+      <div className="relative p-[1.5px] rounded-[32px] bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 shadow-[0_15px_40px_rgba(37,99,235,0.2)]">
         <div className="relative rounded-[30.5px] bg-[#0c1427]/95 backdrop-blur-2xl p-6 sm:p-8 overflow-hidden text-white border border-white/10 space-y-6">
           <div className="cyber-grid absolute inset-0 opacity-20 pointer-events-none" />
-          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-cyan-500/20 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-purple-500/20 blur-3xl pointer-events-none" />
+          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-blue-700/15 blur-3xl pointer-events-none" />
 
           {/* Top Line: Dynamic School Logo & Identity */}
           <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -184,7 +184,7 @@ export default function StudentQuizzesPage() {
                 />
               </div>
               <div>
-                <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest font-khmer block leading-none">
+                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest font-khmer block leading-none">
                   {schoolName}
                 </span>
                 <span className="text-xs text-slate-300 font-khmer">
@@ -198,14 +198,14 @@ export default function StudentQuizzesPage() {
                 to="/student/dashboard"
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-bold backdrop-blur-md transition-all font-khmer"
               >
-                <ArrowLeft className="w-3.5 h-3.5 text-cyan-400" />
+                <ArrowLeft className="w-3.5 h-3.5 text-blue-400" />
                 <span>ត្រឡប់ទៅផ្ទាំងដើម</span>
               </Link>
               <button
                 type="button"
                 onClick={() => refreshStudentScores()}
                 disabled={loading}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 text-xs font-bold transition-all disabled:opacity-50 cursor-pointer font-khmer"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all disabled:opacity-50 cursor-pointer font-khmer shadow-sm shadow-blue-500/20"
                 title="ធ្វើបច្ចុប្បន្នភាពទិន្នន័យ"
               >
                 <RotateCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
@@ -217,8 +217,8 @@ export default function StudentQuizzesPage() {
           {/* Hero Content */}
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold font-khmer">
-                <ClipboardList className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-bold font-khmer">
+                <ClipboardList className="w-3.5 h-3.5 text-blue-400" />
                 <span>កម្រងសំណួរប្រឡង និងកិច្ចការស្រាវជ្រាវប្រចាំឆមាស</span>
               </div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-black font-khmer text-white tracking-wide">
@@ -231,7 +231,7 @@ export default function StudentQuizzesPage() {
 
             {/* Student Info Pill */}
             <div className="p-4 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-xl shrink-0 space-y-1.5 min-w-[240px]">
-              <div className="text-[11px] text-cyan-300 font-bold font-khmer uppercase tracking-wider">
+              <div className="text-[11px] text-blue-300 font-bold font-khmer uppercase tracking-wider">
                 ព័ត៌មាននិស្សិត
               </div>
               <div className="text-base font-bold text-white font-khmer truncate">
@@ -239,7 +239,7 @@ export default function StudentQuizzesPage() {
               </div>
               <div className="flex items-center gap-2 text-xs font-mono">
                 <span className="text-slate-400">ID:</span>
-                <span className="text-cyan-400 font-bold bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/60">
+                <span className="text-blue-400 font-bold bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800/60">
                   {studentSession.studentId}
                 </span>
                 <span className="text-slate-500">•</span>
@@ -250,14 +250,14 @@ export default function StudentQuizzesPage() {
         </div>
       </div>
 
-      {/* 2. Four Glowing Holographic Metric Cards */}
+      {/* 2. Four Metric Cards - Unified Royal Blue System */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         {/* Card 1: Scaled Tasks Score (out of 15) */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-cyan-500/40 via-cyan-500/10 to-transparent hover:from-cyan-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">ពិន្ទុសរុបកិច្ចការ (Scaled)</span>
-              <div className="w-8 h-8 rounded-xl bg-cyan-500/15 text-cyan-500 flex items-center justify-center shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <Award className="w-4 h-4" />
               </div>
             </div>
@@ -268,73 +268,73 @@ export default function StudentQuizzesPage() {
               <span className="text-xs text-slate-400 font-mono font-bold">/ {maxScaled}</span>
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>ទម្ងន់ ១៥% នៃពិន្ទុឆមាសសរុប</span>
             </p>
           </div>
         </div>
 
         {/* Card 2: Average Quiz Score */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-indigo-500/40 via-indigo-500/10 to-transparent hover:from-indigo-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">មធ្យមភាគកម្រងសំណួរ</span>
-              <div className="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center shadow-[0_0_10px_rgba(99,102,241,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <TrendingUp className="w-4 h-4" />
               </div>
             </div>
             <div className="flex items-baseline gap-1 pt-0.5">
-              <span className="text-3xl sm:text-4xl font-black text-indigo-600 dark:text-indigo-400 font-mono tracking-tight">
+              <span className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 font-mono tracking-tight">
                 {avgPct}
               </span>
-              <span className="text-sm text-indigo-500 font-bold font-mono">%</span>
+              <span className="text-sm text-blue-500 font-bold font-mono">%</span>
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>គិតជាមធ្យមលើគ្រប់ Quiz ដែលបានប្រឡង</span>
             </p>
           </div>
         </div>
 
         {/* Card 3: Completed Quizzes Count */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-emerald-500/40 via-emerald-500/10 to-transparent hover:from-emerald-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">ចំនួនសំណួរបានប្រឡង</span>
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <CheckCircle2 className="w-4 h-4" />
               </div>
             </div>
             <div className="flex items-baseline gap-1.5 pt-0.5">
-              <span className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400 font-mono tracking-tight">
+              <span className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 font-mono tracking-tight">
                 {completedCount}
               </span>
               <span className="text-xs text-slate-400 font-mono font-bold">/ {totalCount}</span>
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>{completedCount === totalCount ? "បានប្រឡងគ្រប់ចំនួន ១០០%" : `នៅសល់ ${totalCount - completedCount} កម្រងទៀត`}</span>
             </p>
           </div>
         </div>
 
         {/* Card 4: Overall Task Grade */}
-        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-amber-500/40 via-amber-500/10 to-transparent hover:from-amber-400/60 transition-all duration-300">
-          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)] transition-all">
+        <div className="relative p-[1px] rounded-3xl bg-gradient-to-b from-blue-500/30 via-blue-500/10 to-transparent hover:from-blue-500/50 transition-all duration-300">
+          <div className="h-full bg-white/85 dark:bg-[#0c1427]/90 rounded-[23px] p-5 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm space-y-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] transition-all">
             <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium font-khmer">
               <span className="font-bold">និទ្ទេសកិច្ចការរួម</span>
-              <div className="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.3)]">
+              <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-[0_0_10px_rgba(37,99,235,0.25)]">
                 <Sparkles className="w-4 h-4" />
               </div>
             </div>
             <div className="flex items-center gap-2 pt-0.5">
-              <span className="text-3xl sm:text-4xl font-black text-amber-500 font-mono">
+              <span className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 font-mono">
                 {overallTaskGrade}
               </span>
               <StatusBadge status={overallTaskGrade} />
             </div>
             <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1 font-khmer">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               <span>ខ្ពស់បំផុត៖ {highestScore}/10 • ទាបបំផុត៖ {lowestScore}/10</span>
             </p>
           </div>
@@ -405,7 +405,7 @@ export default function StudentQuizzesPage() {
         <div className="px-5 sm:px-6 py-4 border-b border-slate-100 dark:border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-900/30">
           <div className="space-y-0.5">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
               <h2 className="text-base font-bold text-slate-900 dark:text-white font-khmer">
                 បញ្ជីកម្រងសំណួរលម្អិតទាំងអស់ ({filteredQuizzes.length} / {totalCount})
               </h2>
@@ -418,13 +418,13 @@ export default function StudentQuizzesPage() {
           <div className="flex flex-wrap items-center gap-2.5">
             {/* Search Input */}
             <div className="relative w-full sm:w-60">
-              <Search className="w-3.5 h-3.5 text-cyan-500 absolute left-3.5 top-3" />
+              <Search className="w-3.5 h-3.5 text-blue-500 absolute left-3.5 top-3" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="ស្វែងរក Quiz..."
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white/70 dark:bg-slate-800/60 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all font-khmer"
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700/80 bg-white/70 dark:bg-slate-800/60 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all font-khmer"
               />
             </div>
 
@@ -434,7 +434,7 @@ export default function StudentQuizzesPage() {
                 onClick={() => setStatusFilter("all")}
                 className={`px-2.5 py-1.5 rounded-lg font-bold transition-all ${
                   statusFilter === "all"
-                    ? "bg-white dark:bg-slate-900 text-cyan-600 dark:text-cyan-400 shadow-xs"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
@@ -444,7 +444,7 @@ export default function StudentQuizzesPage() {
                 onClick={() => setStatusFilter("high")}
                 className={`px-2.5 py-1.5 rounded-lg font-bold transition-all ${
                   statusFilter === "high"
-                    ? "bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-xs"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
@@ -454,7 +454,7 @@ export default function StudentQuizzesPage() {
                 onClick={() => setStatusFilter("pass")}
                 className={`px-2.5 py-1.5 rounded-lg font-bold transition-all ${
                   statusFilter === "pass"
-                    ? "bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 shadow-xs"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
@@ -468,7 +468,7 @@ export default function StudentQuizzesPage() {
                 onClick={() => setViewMode("grid")}
                 className={`p-1.5 rounded-lg transition-all ${
                   viewMode === "grid"
-                    ? "bg-white dark:bg-slate-900 text-cyan-500 shadow-xs"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 }`}
                 title="ទិដ្ឋភាពក្រឡា (Grid View)"
@@ -479,7 +479,7 @@ export default function StudentQuizzesPage() {
                 onClick={() => setViewMode("table")}
                 className={`p-1.5 rounded-lg transition-all ${
                   viewMode === "table"
-                    ? "bg-white dark:bg-slate-900 text-cyan-500 shadow-xs"
+                    ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 }`}
                 title="ទិដ្ឋភាពតារាង (Table View)"

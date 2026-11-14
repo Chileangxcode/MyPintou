@@ -94,115 +94,115 @@ export default function AdminLayout() {
           name: "សេចក្តីជូនដំណឹង",
           to: "/admin/announcements",
           iconClass: "fas fa-bullhorn",
-          colorClass: "text-cyan-400 group-hover:text-cyan-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     },
     {
       group: "ផ្នែកនិស្សិត",
-      color: "bg-indigo-500",
+      color: "bg-blue-500",
       items: [
         {
           name: "បញ្ជីរាយនាមនិស្សិត",
           to: "/admin/students",
           iconClass: "fas fa-user-graduate",
-          colorClass: "text-indigo-400 group-hover:text-indigo-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     },
     {
       group: "ពិន្ទុ និងការវាយតម្លៃ",
-      color: "bg-emerald-500",
+      color: "bg-blue-500",
       items: [
         {
           name: "តារាងពិន្ទុរួម",
           to: "/admin/scoring",
           iconClass: "fas fa-award",
-          colorClass: "text-emerald-400 group-hover:text-emerald-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         },
         {
           name: "កម្រងសំណួរ (Quizzes)",
           to: "/admin/quizzes",
           iconClass: "fas fa-tasks",
-          colorClass: "text-cyan-400 group-hover:text-cyan-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         },
         {
           name: "តារាងនិស្សិតឆ្នើម (Honors)",
           to: "/admin/honors",
           iconClass: "fas fa-trophy",
-          colorClass: "text-amber-400 group-hover:text-amber-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         },
         {
           name: "របាយការណ៍ & Export",
           to: "/admin/reports",
           iconClass: "fas fa-file-export",
-          colorClass: "text-teal-400 group-hover:text-teal-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         },
         {
           name: "វិញ្ញាបនបត្រឌីជីថល",
           to: "/admin/certificates",
           iconClass: "fas fa-certificate",
-          colorClass: "text-amber-400 group-hover:text-amber-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     },
     {
       group: "ធនធានសិក្សា & បណ្ណាល័យ",
-      color: "bg-cyan-500",
+      color: "bg-blue-500",
       items: [
         {
           name: "បណ្ណាល័យឌីជីថល (E-Library)",
           to: "/admin/library",
           iconClass: "fas fa-book-open",
-          colorClass: "text-cyan-400 group-hover:text-cyan-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     },
     {
       group: "សកម្មភាព & ហ្គេមក្នុងថ្នាក់",
-      color: "bg-fuchsia-500",
+      color: "bg-blue-500",
       items: [
         {
           name: "ល្បែងប្រណាំងជ្រើសរើសសិស្ស",
           to: "/admin/race-game",
           iconClass: "fas fa-flag-checkered",
-          colorClass: "text-amber-400 group-hover:text-amber-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         },
         {
           name: "កង់បង្វិលជ្រើសរើសឈ្មោះ",
           to: "/admin/wheel",
           iconClass: "fas fa-circle-notch",
-          colorClass: "text-fuchsia-400 group-hover:text-fuchsia-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         },
         {
           name: "បែងចែកក្រុម & រើសប្រធាន",
           to: "/admin/groups",
           iconClass: "fas fa-users",
-          colorClass: "text-emerald-400 group-hover:text-emerald-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     },
     {
       group: "គណនី & សុវត្ថិភាព",
-      color: "bg-rose-500",
+      color: "bg-blue-500",
       items: [
         {
           name: "គ្រប់គ្រងគណនី (Users)",
           to: "/admin/users",
           iconClass: "fas fa-user-shield",
-          colorClass: "text-rose-400 group-hover:text-rose-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     },
     {
       group: "ការកំណត់ប្រព័ន្ធ",
-      color: "bg-purple-500",
+      color: "bg-blue-500",
       items: [
         {
           name: "ការកំណត់ប្រព័ន្ធ",
           to: "/admin/settings",
           iconClass: "fas fa-sliders",
-          colorClass: "text-purple-400 group-hover:text-purple-300"
+          colorClass: "text-blue-400 group-hover:text-blue-300"
         }
       ]
     }
@@ -221,15 +221,15 @@ export default function AdminLayout() {
             <div className="flex flex-col">
               <BrandLogo size="sm" showSubtitle={false} />
               <div className="flex items-center mt-2">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-khmer tracking-wide flex items-center bg-cyan-500/15 text-cyan-400 border border-cyan-500/30">
-                  <i className="fas fa-shield-alt text-[9px] mr-1 text-cyan-400" />
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-khmer tracking-wide flex items-center bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                  <i className="fas fa-shield-alt text-[9px] mr-1 text-blue-400" />
                   <span>{adminSession?.role === "admin" ? "អ្នកគ្រប់គ្រងកំពូល" : "សាស្ត្រាចារ្យ"}</span>
                 </span>
               </div>
             </div>
 
             {/* Glowing divider line */}
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
           </div>
 
           {/* Navigation Items */}
@@ -250,7 +250,7 @@ export default function AdminLayout() {
                     className={({ isActive }) =>
                       `w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-left text-[13px] font-khmer transition-all duration-300 group ${
                         isActive
-                          ? "bg-gradient-to-r from-cyan-500/20 via-blue-600/15 to-transparent text-white font-bold border-l-4 border-cyan-400 shadow-[inset_2px_0_12px_rgba(6,182,212,0.25)]"
+                          ? "bg-gradient-to-r from-blue-600/25 via-blue-500/15 to-transparent text-white font-bold border-l-4 border-blue-500 shadow-[inset_2px_0_12px_rgba(37,99,235,0.25)]"
                           : "hover:bg-slate-800/60 text-slate-400 hover:text-white font-medium border-l-4 border-transparent hover:translate-x-1"
                       }`
                     }
@@ -260,8 +260,8 @@ export default function AdminLayout() {
                         <div
                           className={`w-7 h-7 rounded-lg flex items-center justify-center text-sm transition-all ${
                             isActive
-                              ? "bg-cyan-500/20 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.6)] scale-110"
-                              : "bg-transparent text-slate-400 group-hover:text-cyan-400"
+                              ? "bg-blue-600/20 text-blue-400 drop-shadow-[0_0_8px_rgba(37,99,235,0.6)] scale-110"
+                              : "bg-transparent text-slate-400 group-hover:text-blue-400"
                           }`}
                         >
                           <i className={item.iconClass} />
@@ -279,10 +279,10 @@ export default function AdminLayout() {
               <Link
                 to="/student-lookup"
                 target="_blank"
-                className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 hover:border-cyan-500/40 transition-all group font-khmer"
+                className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 hover:border-blue-500/40 transition-all group font-khmer"
               >
                 <span className="flex items-center gap-2">
-                  <i className="fas fa-external-link-alt text-[10px] text-cyan-400 group-hover:scale-110 transition-transform" />
+                  <i className="fas fa-external-link-alt text-[10px] text-blue-400 group-hover:scale-110 transition-transform" />
                   <span>បើកផ្ទាំងនិស្សិត</span>
                 </span>
                 <i className="fas fa-arrow-right text-[10px] text-slate-500 group-hover:translate-x-1 transition-transform" />
@@ -295,20 +295,20 @@ export default function AdminLayout() {
             {/* Version & Update Check */}
             <div className="px-1 flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span className="flex items-center gap-1.5 font-bold text-slate-300">
-                <i className="fas fa-code-branch text-[9px] text-cyan-400" />
+                <i className="fas fa-code-branch text-[9px] text-blue-400" />
                 <span>v{APP_VERSION}</span>
               </span>
               <button
                 type="button"
                 onClick={handleCheckUpdate}
                 disabled={updateChecking}
-                className="text-[10px] text-cyan-400 hover:text-cyan-300 hover:underline cursor-pointer disabled:opacity-50"
+                className="text-[10px] text-blue-400 hover:text-blue-300 hover:underline cursor-pointer disabled:opacity-50"
               >
                 {updateChecking ? "កំពុងពិនិត្យ..." : "ពិនិត្យកំណែថ្មី"}
               </button>
             </div>
             {updateStatus && (
-              <div className="text-[10px] text-cyan-400 font-khmer text-center px-1 animate-fade-in">
+              <div className="text-[10px] text-blue-400 font-khmer text-center px-1 animate-fade-in">
                 {updateStatus}
               </div>
             )}
@@ -362,7 +362,7 @@ export default function AdminLayout() {
 
               {/* User Profile Pill */}
               <div className="flex items-center space-x-2.5 pl-2 sm:pl-3 border-l border-slate-200 dark:border-slate-800">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-[0_0_12px_rgba(6,182,212,0.4)] ring-2 ring-cyan-500/20 shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-[0_0_12px_rgba(37,99,235,0.4)] ring-2 ring-blue-500/20 shrink-0">
                   <i className="fas fa-user-shield text-xs" />
                 </div>
 
@@ -370,8 +370,8 @@ export default function AdminLayout() {
                   <p className="text-xs font-bold text-slate-800 dark:text-white leading-tight">
                     {adminSession.displayName || "អ្នកគ្រប់គ្រង"}
                   </p>
-                  <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 mt-0.5">
-                    <i className="fas fa-circle text-[6px] mr-1 text-emerald-400 animate-pulse" />
+                  <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 mt-0.5">
+                    <i className="fas fa-circle text-[6px] mr-1 text-blue-500 animate-pulse" />
                     @{adminSession.username}
                   </span>
                 </div>
@@ -380,10 +380,10 @@ export default function AdminLayout() {
                 <button
                   type="button"
                   onClick={triggerPWAInstall}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[44px]"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-600 dark:text-blue-400 text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[44px]"
                   title="ដំឡើងលើទូរស័ព្ទ (Install Mobile App)"
                 >
-                  <i className="fas fa-download text-xs text-cyan-500" />
+                  <i className="fas fa-download text-xs text-blue-500" />
                   <span className="font-khmer hidden sm:inline text-[11px]">ដំឡើងលើទូរស័ព្ទ</span>
                 </button>
 
@@ -462,7 +462,7 @@ export default function AdminLayout() {
                 <button
                   type="button"
                   onClick={handleCheckUpdate}
-                  className="text-cyan-400 underline font-khmer text-[10px]"
+                  className="text-blue-400 underline font-khmer text-[10px]"
                 >
                   ពិនិត្យកំណែថ្មី
                 </button>
@@ -475,7 +475,7 @@ export default function AdminLayout() {
                   setSidebarOpen(false);
                   triggerPWAInstall();
                 }}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400 font-bold text-xs min-h-[44px] cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 font-bold text-xs min-h-[44px] cursor-pointer"
               >
                 <i className="fas fa-download text-xs" />
                 <span>ដំឡើងលើទូរស័ព្ទ</span>
