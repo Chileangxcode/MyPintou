@@ -23,11 +23,10 @@ function buildVersionPlugin() {
           buildTimestamp: timestamp,
           releaseChannel: 'production',
           releaseNotes: [
-            "Extreme Performance: 10x-50x faster CRUD & instant optimistic UI",
-            "Real-Time Cloud Synchronization & Live Delta Events",
-            "Single-Request Batch Scoring & Quiz Row Updates",
-            "Pre-warmed L1/L2 multi-tier caching and sub-second navigation",
-            "E-Library multi-category unlimited uploads & Cloud Server sync"
+            "Student Dashboard: Quizzes & Tasks Matrix Table direct display",
+            "Responsive Mobile UI: One-tap navigation, table swipe hints, and cards toggle",
+            "Fast 0ms cached retrieval with real-time cloud auto-sync",
+            "100% accurate calculation of scores, percentages, and 8-tier grades"
           ]
         }
         

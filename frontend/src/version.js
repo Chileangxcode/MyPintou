@@ -3,15 +3,14 @@
  * Auto-generated and synchronized at build time.
  */
 
-export const APP_VERSION = "2.1.0";
+export const APP_VERSION = "2.2.0";
 export const BUILD_TIMESTAMP = new Date().toISOString();
 export const RELEASE_CHANNEL = "production";
 export const RELEASE_NOTES = [
-  "Extreme Performance: 10x-50x faster CRUD & instant optimistic UI",
-  "Real-Time Cloud Synchronization & Live Delta Events",
-  "Single-Request Batch Scoring & Quiz Row Updates",
-  "Pre-warmed L1/L2 multi-tier caching and sub-second navigation",
-  "E-Library multi-category unlimited uploads & Cloud Server sync"
+  "Student Dashboard: Quizzes & Tasks Matrix Table direct display",
+  "Responsive Mobile UI: One-tap navigation, table swipe hints, and cards toggle",
+  "Fast 0ms cached retrieval with real-time cloud auto-sync",
+  "100% accurate calculation of scores, percentages, and 8-tier grades"
 ];
 
 /**

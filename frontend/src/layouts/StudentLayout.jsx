@@ -74,26 +74,31 @@ export default function StudentLayout() {
   const navItems = [
     {
       name: "ផ្ទាំងគ្រប់គ្រងពិន្ទុ",
+      shortName: "ពិន្ទុ",
       to: "/student/dashboard",
       iconClass: "fas fa-chart-line"
     },
     {
-      name: "បណ្ណាល័យឌីជីថល",
-      to: "/student/library",
-      iconClass: "fas fa-book-open"
-    },
-    {
       name: "សំណួរ និងកិច្ចការ",
+      shortName: "កិច្ចការ",
       to: "/student/quizzes",
       iconClass: "fas fa-list-check"
     },
     {
+      name: "បណ្ណាល័យឌីជីថល",
+      shortName: "បណ្ណាល័យ",
+      to: "/student/library",
+      iconClass: "fas fa-book-open"
+    },
+    {
       name: "ប្រវត្តិរូបនិស្សិត",
+      shortName: "ប្រវត្តិរូប",
       to: "/student/profile",
       iconClass: "fas fa-id-card"
     },
     {
       name: "លិខិតបញ្ជាក់លទ្ធផល",
+      shortName: "ព្រីនលទ្ធផល",
       to: "/student/print",
       iconClass: "fas fa-print"
     }
@@ -385,30 +390,31 @@ export default function StudentLayout() {
       )}
 
       {/* Mobile Bottom Navigation Bar with Safe Area Support */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800/80 px-2 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] no-print font-khmer">
-        <div className="flex items-center justify-around max-w-md mx-auto">
-          {navItems.slice(0, 4).map((item) => (
+      <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800/80 px-1 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] no-print font-khmer">
+        <div className="flex items-center justify-between max-w-md mx-auto">
+          {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center py-1 px-1.5 rounded-xl text-[10px] min-h-[44px] min-w-[54px] transition-all ${
+                `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[48px] flex-1 transition-all ${
                   isActive
-                    ? "text-blue-600 dark:text-blue-400 font-extrabold scale-105"
-                    : "text-slate-400 dark:text-slate-500"
+                    ? "text-cyan-600 dark:text-cyan-400 font-extrabold scale-105"
+                    : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                 }`
               }
             >
-              <i className={`${item.iconClass} text-base`} />
-              <span className="mt-0.5 truncate max-w-[64px]">{item.name.replace("ផ្ទាំងគ្រប់គ្រង", "").replace("លិខិតបញ្ជាក់", "")}</span>
+              <i className={`${item.iconClass} text-sm`} />
+              <span className="mt-0.5 truncate text-[10px] leading-tight">{item.shortName || item.name}</span>
             </NavLink>
           ))}
           <button
             onClick={() => setSidebarOpen(true)}
-            className="flex flex-col items-center justify-center py-1 px-1.5 rounded-xl text-[10px] min-h-[44px] min-w-[54px] text-slate-400 dark:text-slate-500 hover:text-blue-500 cursor-pointer"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[44px] text-slate-400 dark:text-slate-500 hover:text-cyan-500 cursor-pointer"
+            title="ម៉ឺនុយបន្ថែម"
           >
-            <i className="fas fa-bars text-base" />
-            <span className="mt-0.5">ម៉ឺនុយ</span>
+            <i className="fas fa-bars text-sm" />
+            <span className="mt-0.5 text-[10px] leading-tight">ម៉ឺនុយ</span>
           </button>
         </div>
       </nav>

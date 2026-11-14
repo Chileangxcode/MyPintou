@@ -118,6 +118,8 @@ export default function StudentQuizzesPage() {
   const validScores = completedQuizzes.map((q) => q.score).filter((s) => s != null);
   const highestScore = validScores.length > 0 ? Math.max(...validScores) : 0;
   const lowestScore = validScores.length > 0 ? Math.min(...validScores) : 0;
+  const rawSumScore = Math.round(completedQuizzes.reduce((acc, q) => acc + (q.score || 0), 0) * 10) / 10;
+  const rawSumMax = quizList.reduce((acc, q) => acc + (q.maxScore || 10), 0);
 
   // Overall Task Letter Grade
   const overallTaskGrade = scaledScore > 0
@@ -555,75 +557,136 @@ export default function StudentQuizzesPage() {
           </div>
         ) : (
           /* View Mode: Data Table */
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50/90 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800/80 text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider font-mono">
-                <tr>
-                  <th className="py-3.5 px-5">#</th>
-                  <th className="py-3.5 px-5 font-khmer">ឈ្មោះកម្រងសំណួរ</th>
-                  <th className="py-3.5 px-4 text-center font-khmer">ពិន្ទុទទួលបាន</th>
-                  <th className="py-3.5 px-4 text-center font-khmer">ពិន្ទុពេញ</th>
-                  <th className="py-3.5 px-5 font-khmer">ភាគរយ %</th>
-                  <th className="py-3.5 px-5 text-right font-khmer">និទ្ទេស</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-mono">
-                {filteredQuizzes.length === 0 ? (
+          <div className="relative overflow-hidden">
+            {/* Mobile swipe helper hint */}
+            <div className="sm:hidden px-4 py-1.5 bg-gradient-to-r from-cyan-500/10 via-blue-500/5 to-transparent border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-khmer text-cyan-600 dark:text-cyan-400">
+              <span className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                👉 អូសទៅឆ្វេង-ស្តាំដើម្បីមើលតារាង
+              </span>
+              <button
+                type="button"
+                onClick={() => setViewMode("grid")}
+                className="underline font-bold text-slate-600 dark:text-slate-300 active:text-cyan-400 cursor-pointer"
+              >
+                ប្តូរទៅមើលជាកាត 📱
+              </button>
+            </div>
+
+            <div className="overflow-x-auto mobile-scroll">
+              <table className="w-full text-left text-xs sm:text-sm min-w-[560px] sm:min-w-full">
+                <thead className="bg-slate-50/90 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800/80 text-[11px] sm:text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider font-mono">
                   <tr>
-                    <td colSpan={6} className="py-12 text-center text-xs text-slate-400">
-                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-slate-400 font-khmer">
-                        <Search className="w-3.5 h-3.5" />
-                        <span>មិនមានកម្រងសំណួរត្រូវនឹងលក្ខខណ្ឌស្វែងរកឡើយ</span>
+                    <th className="py-3 px-3 sm:px-5 w-12 text-center">#</th>
+                    <th className="py-3 px-3 sm:px-5 font-khmer">ឈ្មោះកម្រងសំណួរ</th>
+                    <th className="py-3 px-3 sm:px-4 text-center font-khmer">ពិន្ទុទទួលបាន</th>
+                    <th className="py-3 px-3 sm:px-4 text-center font-khmer">ពិន្ទុពេញ</th>
+                    <th className="py-3 px-3 sm:px-5 font-khmer">ភាគរយ %</th>
+                    <th className="py-3 px-3 sm:px-4 text-center font-khmer">និទ្ទេស</th>
+                    <th className="py-3 px-3 sm:px-5 text-right font-khmer">ស្ថានភាព</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-mono">
+                  {filteredQuizzes.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="py-12 text-center text-xs text-slate-400">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-slate-400 font-khmer">
+                          <Search className="w-3.5 h-3.5" />
+                          <span>មិនមានកម្រងសំណួរត្រូវនឹងលក្ខខណ្ឌស្វែងរកឡើយ</span>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredQuizzes.map((quiz, index) => {
+                      const pct = quiz.percentage != null ? Math.round(quiz.percentage) : null;
+                      return (
+                        <tr key={quiz.id} className="hover:bg-cyan-500/[0.03] dark:hover:bg-cyan-500/[0.05] transition-colors">
+                          <td className="py-3 px-3 sm:px-5 text-center text-xs text-slate-400">
+                            {String(index + 1).padStart(2, "0")}
+                          </td>
+                          <td className="py-3 px-3 sm:px-5 font-bold text-slate-800 dark:text-slate-200">
+                            <span className="text-cyan-600 dark:text-cyan-400 font-khmer text-xs sm:text-sm">{quiz.name}</span>
+                          </td>
+                          <td className="py-3 px-3 sm:px-4 text-center font-black text-slate-900 dark:text-white text-base">
+                            {quiz.score != null ? quiz.score : "—"}
+                          </td>
+                          <td className="py-3 px-3 sm:px-4 text-center text-xs text-slate-400 font-bold">
+                            {quiz.maxScore}
+                          </td>
+                          <td className="py-3 px-3 sm:px-5">
+                            <div className="flex items-center gap-2">
+                              <div className="w-20 sm:w-28 h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden p-0.5">
+                                <div
+                                  className={`h-full rounded-full transition-all duration-700 ${
+                                    pct >= 85
+                                      ? "bg-gradient-to-r from-emerald-500 to-teal-400"
+                                      : pct >= 70
+                                      ? "bg-gradient-to-r from-cyan-500 to-blue-500"
+                                      : pct >= 50
+                                      ? "bg-gradient-to-r from-amber-500 to-yellow-400"
+                                      : "bg-gradient-to-r from-rose-500 to-pink-500"
+                                  }`}
+                                  style={{ width: `${Math.min(pct || 0, 100)}%` }}
+                                />
+                              </div>
+                              <span className="text-xs font-bold text-slate-700 dark:text-slate-300 w-9 text-right">
+                                {pct != null ? `${pct}%` : "—"}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-3 px-3 sm:px-4 text-center">
+                            <StatusBadge status={quiz.grade} size="sm" />
+                          </td>
+                          <td className="py-3 px-3 sm:px-5 text-right font-khmer">
+                            {quiz.completed ? (
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                                <span>បានប្រឡង</span>
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                                <Clock className="w-3 h-3 text-slate-400" />
+                                <span>មិនទាន់មានពិន្ទុ</span>
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+                {/* Table Footer with Summary */}
+                <tfoot className="bg-slate-50/95 dark:bg-slate-900/70 border-t-2 border-slate-200 dark:border-slate-800 font-semibold text-xs text-slate-700 dark:text-slate-300">
+                  <tr>
+                    <td colSpan={2} className="py-3.5 px-3 sm:px-5 font-bold font-khmer">
+                      សរុបពិន្ទុកិច្ចការ (Total Quizzes)
+                    </td>
+                    <td className="py-3.5 px-3 sm:px-4 text-center font-black text-cyan-600 dark:text-cyan-400 text-sm sm:text-base">
+                      {rawSumScore}
+                    </td>
+                    <td className="py-3.5 px-3 sm:px-4 text-center text-xs text-slate-400 font-bold">
+                      {rawSumMax}
+                    </td>
+                    <td className="py-3.5 px-3 sm:px-5">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-slate-900 dark:text-white">
+                          {avgPct}%
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-khmer">
+                          (មធ្យមភាគ)
+                        </span>
                       </div>
                     </td>
+                    <td className="py-3.5 px-3 sm:px-4 text-center">
+                      <StatusBadge status={overallTaskGrade} size="sm" />
+                    </td>
+                    <td className="py-3.5 px-3 sm:px-5 text-right font-khmer text-[11px] text-cyan-600 dark:text-cyan-400 font-bold">
+                      ទម្ងន់ {scaledScore}/{maxScaled} pts
+                    </td>
                   </tr>
-                ) : (
-                  filteredQuizzes.map((quiz, index) => {
-                    const pct = quiz.percentage != null ? Math.round(quiz.percentage) : null;
-                    return (
-                      <tr key={quiz.id} className="hover:bg-cyan-500/[0.03] dark:hover:bg-cyan-500/[0.05] transition-colors">
-                        <td className="py-3.5 px-5 text-xs text-slate-400">
-                          {String(index + 1).padStart(2, "0")}
-                        </td>
-                        <td className="py-3.5 px-5 font-bold text-slate-800 dark:text-slate-200">
-                          <span className="text-cyan-600 dark:text-cyan-400">{quiz.name}</span>
-                        </td>
-                        <td className="py-3.5 px-4 text-center font-black text-slate-900 dark:text-white text-base">
-                          {quiz.score != null ? quiz.score : "—"}
-                        </td>
-                        <td className="py-3.5 px-4 text-center text-xs text-slate-400 font-bold">
-                          {quiz.maxScore}
-                        </td>
-                        <td className="py-3.5 px-5">
-                          <div className="flex items-center gap-2.5">
-                            <div className="w-24 sm:w-32 h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden p-0.5">
-                              <div
-                                className={`h-full rounded-full transition-all duration-700 ${
-                                  pct >= 85
-                                    ? "bg-gradient-to-r from-emerald-500 to-teal-400"
-                                    : pct >= 70
-                                    ? "bg-gradient-to-r from-cyan-500 to-blue-500"
-                                    : pct >= 50
-                                    ? "bg-gradient-to-r from-amber-500 to-yellow-400"
-                                    : "bg-gradient-to-r from-rose-500 to-pink-500"
-                                }`}
-                                style={{ width: `${Math.min(pct || 0, 100)}%` }}
-                              />
-                            </div>
-                            <span className="text-xs font-bold text-slate-700 dark:text-slate-300 w-10 text-right">
-                              {pct != null ? `${pct}%` : "—"}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3.5 px-5 text-right">
-                          <StatusBadge status={quiz.grade} size="sm" />
-                        </td>
-                      </tr>
-                    );
-                  })
-                )}
-              </tbody>
-            </table>
+                </tfoot>
+              </table>
+            </div>
           </div>
         )}
 
