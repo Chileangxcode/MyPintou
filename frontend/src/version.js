@@ -3,14 +3,14 @@
  * Auto-generated and synchronized at build time.
  */
 
-export const APP_VERSION = "2.2.0";
+export const APP_VERSION = "2.2.1";
 export const BUILD_TIMESTAMP = new Date().toISOString();
 export const RELEASE_CHANNEL = "production";
 export const RELEASE_NOTES = [
-  "Student Dashboard: Quizzes & Tasks Matrix Table direct display",
-  "Responsive Mobile UI: One-tap navigation, table swipe hints, and cards toggle",
-  "Fast 0ms cached retrieval with real-time cloud auto-sync",
-  "100% accurate calculation of scores, percentages, and 8-tier grades"
+  "Mobile Navigation Bar Fix: Safe-area inset spacing for iPhone home indicator",
+  "Footer Padding Fix: Prevent footer text bleed behind fixed bottom navigation",
+  "Clean 5-Tab mobile bottom bar with comfortable touch targets",
+  "Student Dashboard: Quizzes & Tasks Matrix table displayed above Badges"
 ];
 
 /**

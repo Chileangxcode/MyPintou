@@ -1,11 +1,11 @@
 {
-  "version": "2.2.0",
-  "buildTimestamp": "2026-11-14T03:01:25.702Z",
+  "version": "2.2.1",
+  "buildTimestamp": "2026-11-14T03:06:45.862Z",
   "releaseChannel": "production",
   "releaseNotes": [
-    "Student Dashboard: Quizzes & Tasks Matrix Table direct display",
-    "Responsive Mobile UI: One-tap navigation, table swipe hints, and cards toggle",
-    "Fast 0ms cached retrieval with real-time cloud auto-sync",
-    "100% accurate calculation of scores, percentages, and 8-tier grades"
+    "Mobile Navigation Bar Fix: Safe-area inset spacing for iPhone home indicator",
+    "Footer Padding Fix: Prevent footer text bleed behind fixed bottom navigation",
+    "Clean 5-Tab mobile bottom bar with comfortable touch targets",
+    "Student Dashboard: Quizzes & Tasks Matrix table displayed above Badges"
   ]
 }

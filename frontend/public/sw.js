@@ -8,7 +8,7 @@
  * - Safe Cache Cleanup & Message-Based Skip-Waiting
  */
 
-const CACHE_VERSION = "mypintou-v2.2.0";
+const CACHE_VERSION = "mypintou-v2.2.1";
 const STATIC_CACHE = `mypintou-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `mypintou-runtime-${CACHE_VERSION}`;
 

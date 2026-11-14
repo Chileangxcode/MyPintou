@@ -390,31 +390,41 @@ export default function StudentLayout() {
       )}
 
       {/* Mobile Bottom Navigation Bar with Safe Area Support */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800/80 px-1 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] no-print font-khmer">
-        <div className="flex items-center justify-between max-w-md mx-auto">
-          {navItems.map((item) => (
+      <nav
+        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/98 dark:bg-[#0c1427]/98 backdrop-blur-2xl border-t border-slate-200/90 dark:border-white/10 px-2 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] no-print font-khmer"
+        style={{
+          paddingBottom: "max(1.1rem, calc(env(safe-area-inset-bottom, 0px) + 0.5rem))"
+        }}
+      >
+        <div className="flex items-center justify-around max-w-md mx-auto">
+          {navItems.slice(0, 4).map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[48px] flex-1 transition-all ${
+                `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 transition-all ${
                   isActive
                     ? "text-cyan-600 dark:text-cyan-400 font-extrabold scale-105"
                     : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                 }`
               }
             >
-              <i className={`${item.iconClass} text-sm`} />
-              <span className="mt-0.5 truncate text-[10px] leading-tight">{item.shortName || item.name}</span>
+              <i className={`${item.iconClass} text-base`} />
+              <span className="mt-1 font-khmer font-bold text-[10px] leading-tight text-center">
+                {item.shortName || item.name}
+              </span>
             </NavLink>
           ))}
           <button
+            type="button"
             onClick={() => setSidebarOpen(true)}
-            className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[44px] text-slate-400 dark:text-slate-500 hover:text-cyan-500 cursor-pointer"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 text-slate-400 dark:text-slate-500 hover:text-cyan-500 cursor-pointer transition-all active:scale-95"
             title="ម៉ឺនុយបន្ថែម"
           >
-            <i className="fas fa-bars text-sm" />
-            <span className="mt-0.5 text-[10px] leading-tight">ម៉ឺនុយ</span>
+            <i className="fas fa-bars text-base" />
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-tight text-center">
+              ម៉ឺនុយ
+            </span>
           </button>
         </div>
       </nav>

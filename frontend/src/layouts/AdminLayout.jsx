@@ -497,7 +497,12 @@ export default function AdminLayout() {
       )}
 
       {/* Mobile Bottom Navigation with Safe Area Support */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800/80 px-2 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom,0px))] shadow-[0_-4px_25px_rgba(0,0,0,0.15)] no-print font-khmer">
+      <nav
+        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/98 dark:bg-[#0c1427]/98 backdrop-blur-2xl border-t border-slate-200/90 dark:border-white/10 px-2 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] no-print font-khmer"
+        style={{
+          paddingBottom: "max(1.1rem, calc(env(safe-area-inset-bottom, 0px) + 0.5rem))"
+        }}
+      >
         <div className="flex items-center justify-around max-w-md mx-auto">
           <NavLink
             to="/admin/dashboard"
