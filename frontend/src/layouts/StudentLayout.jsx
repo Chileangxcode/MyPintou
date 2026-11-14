@@ -391,10 +391,7 @@ export default function StudentLayout() {
 
       {/* Mobile Bottom Navigation Bar with Safe Area Support */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/98 dark:bg-[#0c1427]/98 backdrop-blur-2xl border-t border-slate-200/90 dark:border-white/10 px-2 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] no-print font-khmer"
-        style={{
-          paddingBottom: "max(1.1rem, calc(env(safe-area-inset-bottom, 0px) + 0.5rem))"
-        }}
+        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/98 dark:bg-[#0c1427]/98 backdrop-blur-2xl border-t border-slate-200/90 dark:border-white/10 px-2 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] no-print font-khmer mobile-bottom-nav"
       >
         <div className="flex items-center justify-around max-w-md mx-auto">
           {navItems.slice(0, 4).map((item) => (
@@ -410,7 +407,7 @@ export default function StudentLayout() {
               }
             >
               <i className={`${item.iconClass} text-base`} />
-              <span className="mt-1 font-khmer font-bold text-[10px] leading-tight text-center">
+              <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">
                 {item.shortName || item.name}
               </span>
             </NavLink>
@@ -422,7 +419,7 @@ export default function StudentLayout() {
             title="ម៉ឺនុយបន្ថែម"
           >
             <i className="fas fa-bars text-base" />
-            <span className="mt-1 font-khmer font-bold text-[10px] leading-tight text-center">
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">
               ម៉ឺនុយ
             </span>
           </button>

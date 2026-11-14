@@ -498,16 +498,13 @@ export default function AdminLayout() {
 
       {/* Mobile Bottom Navigation with Safe Area Support */}
       <nav
-        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/98 dark:bg-[#0c1427]/98 backdrop-blur-2xl border-t border-slate-200/90 dark:border-white/10 px-2 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] no-print font-khmer"
-        style={{
-          paddingBottom: "max(1.1rem, calc(env(safe-area-inset-bottom, 0px) + 0.5rem))"
-        }}
+        className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/98 dark:bg-[#0c1427]/98 backdrop-blur-2xl border-t border-slate-200/90 dark:border-white/10 px-2 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] no-print font-khmer mobile-bottom-nav"
       >
         <div className="flex items-center justify-around max-w-md mx-auto">
           <NavLink
             to="/admin/dashboard"
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] min-h-[44px] min-w-[54px] transition-all ${
+              `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 transition-all ${
                 isActive
                   ? "text-blue-600 dark:text-blue-400 font-extrabold scale-105"
                   : "text-slate-400 dark:text-slate-500"
@@ -515,13 +512,13 @@ export default function AdminLayout() {
             }
           >
             <i className="fas fa-chart-pie text-base" />
-            <span className="mt-0.5">ទិដ្ឋភាព</span>
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">ទិដ្ឋភាព</span>
           </NavLink>
 
           <NavLink
             to="/admin/students"
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] min-h-[44px] min-w-[54px] transition-all ${
+              `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 transition-all ${
                 isActive
                   ? "text-blue-600 dark:text-blue-400 font-extrabold scale-105"
                   : "text-slate-400 dark:text-slate-500"
@@ -529,13 +526,13 @@ export default function AdminLayout() {
             }
           >
             <i className="fas fa-user-graduate text-base" />
-            <span className="mt-0.5">សិស្ស</span>
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">សិស្ស</span>
           </NavLink>
 
           <NavLink
             to="/admin/scoring"
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] min-h-[44px] min-w-[54px] transition-all ${
+              `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 transition-all ${
                 isActive
                   ? "text-blue-600 dark:text-blue-400 font-extrabold scale-105"
                   : "text-slate-400 dark:text-slate-500"
@@ -543,13 +540,13 @@ export default function AdminLayout() {
             }
           >
             <i className="fas fa-award text-base" />
-            <span className="mt-0.5">ពិន្ទុ</span>
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">ពិន្ទុ</span>
           </NavLink>
 
           <NavLink
             to="/admin/quizzes"
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] min-h-[44px] min-w-[54px] transition-all ${
+              `flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 transition-all ${
                 isActive
                   ? "text-blue-600 dark:text-blue-400 font-extrabold scale-105"
                   : "text-slate-400 dark:text-slate-500"
@@ -557,15 +554,15 @@ export default function AdminLayout() {
             }
           >
             <i className="fas fa-tasks text-base" />
-            <span className="mt-0.5">កិច្ចការ</span>
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">កិច្ចការ</span>
           </NavLink>
 
           <button
             onClick={() => setSidebarOpen(true)}
-            className="flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] min-h-[44px] min-w-[54px] text-slate-400 dark:text-slate-500 hover:text-blue-500 cursor-pointer"
+            className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-[10px] min-h-[44px] min-w-[54px] flex-1 text-slate-400 dark:text-slate-500 hover:text-blue-500 cursor-pointer"
           >
             <i className="fas fa-bars text-base" />
-            <span className="mt-0.5">ម៉ឺនុយ</span>
+            <span className="mt-1 font-khmer font-bold text-[10px] leading-snug text-center whitespace-nowrap">ម៉ឺនុយ</span>
           </button>
         </div>
       </nav>
